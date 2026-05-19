@@ -5,7 +5,9 @@ Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10
 ## Contents
 
 - **docs/** — Setup guides and hardware notes
-- **configs/** — System config files (copy to /etc/)
+- **configs/** — Config files mirroring their target paths
+  - `configs/system/` → `/etc/`
+  - `configs/niri/.config/` → `~/.config/`
 - **scripts/** — Automation tools
 
 ## Quick Start
@@ -17,8 +19,13 @@ cd Yoga-7-14AKP10-Linux-Config
 # Read the relevant guide first
 cat docs/INSTALL_GUIDE.md
 
-# Copy configs
+# System configs (/etc/)
 sudo cp -r configs/system/* /etc/
+
+# Niri + iio-niri (user configs)
+cp -r configs/niri/.config/* ~/.config/
+systemctl --user daemon-reload
+systemctl --user enable --now iio-niri.service
 ```
 
 ## Docs
