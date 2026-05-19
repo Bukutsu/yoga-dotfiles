@@ -13,6 +13,10 @@ input {
         numlock // Enable numlock on startup
     }
 
+    touch {
+        map-to-output "eDP-1"
+    }
+
     touchpad {
         accel-profile "flat"
         accel-speed 0.75
