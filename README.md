@@ -13,7 +13,7 @@ Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10
 ## Quick Start
 
 ```bash
-git clone https://github.com/Bukutsu/Yoga-7-14AKP10-Linux-Config.git
+git clone https://github.com/Bukutsu/yoga-dotfiles.git
 cd Yoga-7-14AKP10-Linux-Config
 
 # Read the relevant guide first
