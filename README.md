@@ -34,6 +34,7 @@ systemctl --user enable --now iio-niri.service
 - [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) — Speaker and EasyEffects setup
 - [AUDIO_RESEARCH.md](docs/AUDIO_RESEARCH.md) — Hardware analysis and tuning research
 - [BIOPASS_PAM_SETUP.md](docs/BIOPASS_PAM_SETUP.md) — Face authentication
+- [COPILOT_KEY.md](docs/COPILOT_KEY.md) — Copilot key remap via keyd for KDE
 - [DEBRANDING.md](docs/DEBRANDING.md) — Remove CachyOS branding
 - [LIMINE_THEMING.md](docs/LIMINE_THEMING.md) — Bootloader customization
 - [TRANSFORM_TO_ARCH.md](docs/TRANSFORM_TO_ARCH.md) — CachyOS to Arch migration

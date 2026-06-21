@@ -48,8 +48,9 @@ Personal config & documentation for **Lenovo Yoga 7 14AKP10** (Ryzen AI 7 350, A
 - **`configs/system/scheduler/scx_loader.toml`** — sched-ext profiles tuned for Strix Point (P-core/E-core topology, shared 16 MB L3 CCX). Default: `scx_lavd` + Powersave mode.
 - **`configs/system/network/disable-wifi-powersave.conf`** — WiFi power-save off for RTL892AE.
 - **`configs/fontconfig/conf.d/`** — Thai font aliasing + Flatpak host font sync snippet.
+- **`configs/system/etc/keyd/default.conf`** — Copilot key chord remap (`Meta+Shift+F23` → F24).
 - **`configs/audio/`** — EasyEffects presets for Yoga 7 (4-speaker ALC3306), custom Dolby Atmos impulse responses, PEQ filters.
-- **`docs/`** — AUDIO_TUNING, DEBRANDING, INSTALL_GUIDE, LIMINE_THEMING, TRANSFORM_TO_ARCH.
+- **`docs/`** — AUDIO_TUNING, COPILOT_KEY, DEBRANDING, INSTALL_GUIDE, LIMINE_THEMING, TRANSFORM_TO_ARCH.
 
 ## Agent workflow notes
 
