@@ -109,6 +109,10 @@ The Yoga 7 features a hardware Infrared camera that works perfectly on Linux for
 If you leave your laptop plugged in frequently, you can preserve the battery's chemical lifespan by limiting the hardware charge to 80%.
 *   **GNOME/KDE**: This is natively supported. Look for "Charge Limit" or "Conservation Mode" in your desktop environment's Power settings.
 
+### Color Calibration (OLED Display Profile)
+Apply the factory-calibrated X-Rite color profile for the 14" 2.8K OLED display to ensure color accuracy:
+*   **Guide**: See [COLOR_MANAGEMENT.md](COLOR_MANAGEMENT.md) for installation and application instructions.
+
 ---
 
 ## Exit Strategy (If CachyOS Disappears)
