@@ -25,6 +25,12 @@ Move back to the standard Arch kernel and remove the CachyOS kernel to prevent d
 sudo pacman -S linux linux-headers
 sudo pacman -Rs linux-cachyos linux-cachyos-headers
 ```
+Clean up the CachyOS bootloader theme blocks from `/boot/limine.conf`:
+```bash
+sudo sed -i '/# CachyOS Limine theme/,/wallpaper:/d' /boot/limine.conf
+sudo sed -i '/interface_branding:/d' /boot/limine.conf
+sudo sed -i '/term_palette/d; /term_background/d; /term_foreground/d' /boot/limine.conf
+```
 Update your Limine configuration (usually `/etc/default/limine`) to ensure your kernel parameters (like `amd_pstate=active pcie_aspm=force`) are preserved for the new kernel, then regenerate the bootloader config:
 ```bash
 sudo limine-mkinitcpio
@@ -39,13 +45,43 @@ sudo pacman -S extra/scx-scheds extra/scx-tools
 ```
 *(If you were using `scx-manager`, it will stop receiving updates as it is CachyOS-specific, but your `/etc/scx_loader.toml` will continue to work perfectly with the upstream `scx_loader`)*
 
-**5. Clean Up Leftovers & Branding**
-List any remaining packages that are no longer in standard repositories and purge any remaining CachyOS branding:
-```bash
-# 1. Identify foreign packages
-pacman -Qm
+**5. Clean Up Leftovers & Purge Branding**
+Remove CachyOS-specific branding, mask configuration hooks to prevent future updates from restoring them, and reset system themes to default.
 
-# 2. Purge branding and settings packages to ensure persistence
-sudo pacman -Rs cachyos-hooks cachyos-settings cachyos-hello
-```
-Review the list from `pacman -Qm` and remove any other CachyOS-specific utilities that you no longer need.
+* **Step A: Purge packages and mask branding hooks**
+  ```bash
+  # 1. Identify foreign packages
+  pacman -Qm
+
+  # 2. Mask branding hooks (prevents CachyOS from overwriting system files on update)
+  sudo mkdir -p /etc/libalpm/hooks/
+  for hook in os-release.hook lsb-release.hook; do
+    sudo ln -sf /dev/null "/etc/libalpm/hooks/$hook"
+  done
+
+  # 3. Restore stock filesystem identity files
+  sudo pacman -S filesystem lsb-release
+  sudo ln -sf /usr/lib/os-release /etc/os-release
+  sudo ln -sf /usr/lib/lsb-release /etc/lsb-release
+  ```
+
+* **Step B: Reset GDM Login Screen Logo (Optional)**
+  Choose depending on whether you want to keep other CachyOS performance tweaks:
+  * **Option 1 (Full Purge):** Remove the settings packages:
+    ```bash
+    sudo pacman -Rs cachyos-hooks cachyos-settings cachyos-hello
+    sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+    ```
+  * **Option 2 (Keep tweaks, hide logo):** Override the organization schema:
+    ```bash
+    printf '[org.gnome.login-screen]\nlogo='\'''\''\n' | sudo tee /usr/share/glib-2.0/schemas/zzzz_arch-fix.gschema.override
+    sudo glib-compile-schemas /usr/share/glib-2.0/schemas/
+    ```
+
+* **Step C: Restore Plymouth Boot Splash Theme**
+  ```bash
+  sudo plymouth-set-default-theme bgrt
+  sudo mkinitcpio -P
+  sudo limine-update
+  ```
+
