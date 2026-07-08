@@ -36,6 +36,7 @@ systemctl --user enable --now iio-niri.service
 - [COLOR_MANAGEMENT.md](docs/COLOR_MANAGEMENT.md) — Display color profile configuration
 - [COPILOT_KEY.md](docs/COPILOT_KEY.md) — Copilot key remap via keyd for KDE
 - [TRANSFORM_TO_ARCH.md](docs/TRANSFORM_TO_ARCH.md) — CachyOS to Arch migration
+- [DDC_CI_MONITOR_CONTROL.md](docs/DDC_CI_MONITOR_CONTROL.md) — External monitor input switching via DDC/CI
 
 ## Device
 
