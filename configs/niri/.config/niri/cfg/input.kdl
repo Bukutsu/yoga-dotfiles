@@ -6,7 +6,7 @@ input {
         xkb {
             //If you want to overwrite your keyboard layout,
             // uncomment the line below and change the layout accordingly.
-            //layout "us" // Use the American keyboard layout
+            layout "us,th" // Use the American keyboard layout
         }
         numlock // Enable numlock on startup
     }
@@ -19,8 +19,8 @@ input {
     mouse {
         // If you want to disable Mouse Acceleration,
         // uncomment the lines below.
-        //accel-profile "flat"
-        //accel-speed 0.0
+        accel-profile "flat"
+        accel-speed -0.75 // DPI 1600 feels like 400
     }
 
     focus-follows-mouse // Automatically focus windows under the mouse pointer
