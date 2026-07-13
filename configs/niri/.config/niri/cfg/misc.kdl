@@ -4,7 +4,7 @@
     environment {
         // Default Applications
         TERMINAL "alacritty"
-        BROWSER "firefox"
+        BROWSER "zen-browser"
         FILE_MANAGER "dolphin"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
