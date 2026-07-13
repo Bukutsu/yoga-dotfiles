@@ -33,3 +33,4 @@ limine_output.txt
 .env
 .env.local
 secrets/
+niri-docs/
