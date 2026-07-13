@@ -106,9 +106,9 @@ binds {
     Mod+W repeat=false { toggle-overview; }
     Mod+Slash repeat=false { spawn-sh "noctalia msg panel-toggle launcher"; }
     // niri cannot bind a modifier tap; use Mod+A or Mod+Slash instead.
-    Mod+F repeat=false { spawn "dolphin"; }
-    Mod+T repeat=false { spawn "alacritty"; }
-    Mod+B repeat=false { spawn "xdg-open" "about:blank"; }
+    Mod+F repeat=false { spawn-sh "$FILE_MANAGER"; }
+    Mod+T repeat=false { spawn-sh "$TERMINAL"; }
+    Mod+B repeat=false { spawn-sh "$BROWSER"; }
     Mod+Alt+S repeat=false { spawn "orca"; }
 
     // Media, power, and hardware. These remain usable while locked.
