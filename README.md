@@ -7,7 +7,9 @@ Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10
 - **docs/** — Setup guides and hardware notes
 - **configs/** — Config files mirroring their target paths
   - `configs/system/` → `/etc/`
-  - `configs/niri/.config/` → `~/.config/`
+  - `configs/niri/.config/niri/` → `~/.config/niri/`
+  - `configs/hypr/.config/hypr/` → `~/.config/hypr/`
+  - `configs/alacritty/.config/alacritty/` → `~/.config/alacritty/`
 - **scripts/** — Automation tools
 
 ## Quick Start
@@ -22,10 +24,16 @@ cat docs/INSTALL_GUIDE.md
 # System configs (/etc/)
 sudo cp -r configs/system/* /etc/
 
-# Niri + iio-niri (user configs)
-cp -r configs/niri/.config/* ~/.config/
-systemctl --user daemon-reload
-systemctl --user enable --now iio-niri.service
+# Niri + iio-niri
+cp -r configs/niri/.config/niri ~/.config/
+
+# Hyprland
+cp -r configs/hypr/.config/hypr ~/.config/
+
+# Alacritty
+cp -r configs/alacritty/.config/alacritty ~/.config/
+
+# iio-niri starts with Niri from config.kdl; restart the session to apply.
 ```
 
 ## Docs

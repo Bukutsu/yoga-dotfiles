@@ -1,0 +1,24 @@
+// ────────────── Display Configuration ──────────────
+// Managed in a separate file — niri includes are relative to ~/.config/niri/
+// Reload by saving: niri validates and reloads automatically.
+//
+// Quick reference:
+//   niri msg outputs               — list all outputs and their properties
+//   niri msg action set-mode "X" WxH@R — change mode at runtime
+//   niri msg action set-scale "X" S   — change scale at runtime
+//   niri msg action set-transform "X" T — rotate at runtime
+
+output "HDMI-A-1" {
+    // Acer VG250Q — external monitor
+    mode "1920x1080@240.000"
+    scale 1.0
+    position x=0 y=0
+}
+
+output "eDP-1" {
+    // Lenovo laptop built-in display
+    // Transform set by iio-niri for auto-rotation; do not hardcode here.
+    mode "2880x1800@60.000"
+    scale 1.75
+    position x=1920 y=0
+}
