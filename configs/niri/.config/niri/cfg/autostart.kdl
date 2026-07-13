@@ -1,0 +1,3 @@
+spawn-at-startup "noctalia"
+spawn-at-startup "iio-niri" "listen"
+spawn-sh-at-startup "qs -c noctalia-shell"
