@@ -108,6 +108,7 @@ binds {
     // niri cannot bind a modifier tap; use Mod+A or Mod+Slash instead.
     Mod+F repeat=false { spawn-sh "$FILE_MANAGER"; }
     Mod+T repeat=false { spawn-sh "$TERMINAL"; }
+    Mod+Return repeat=false { spawn-sh "$TERMINAL"; }
     F24 repeat=false { spawn-sh "$TERMINAL"; } // Copilot key mapped via keyd
     Mod+B repeat=false { spawn-sh "$BROWSER"; }
     Mod+Alt+S repeat=false { spawn "orca"; }
