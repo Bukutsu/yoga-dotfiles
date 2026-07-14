@@ -12,7 +12,7 @@ binds {
 
     // Screenshots use native niri actions, not DMS.
     Print { screenshot; }
-    Mod+Shift+S { screenshot-window; }
+    Mod+Shift+S { screenshot; }
 
     // Media & hardware via DMS (OSD, better integration)
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
