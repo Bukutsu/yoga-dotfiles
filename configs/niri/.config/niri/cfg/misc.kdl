@@ -3,9 +3,9 @@
 
     environment {
         // Default Applications
-        TERMINAL "alacritty"
-        BROWSER "zen-browser"
-        FILE_MANAGER "dolphin"
+        TERMINAL "kitty"
+        BROWSER "helium-browser"
+        FILE_MANAGER "nautilus"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
         QT_QPA_PLATFORM "wayland"
