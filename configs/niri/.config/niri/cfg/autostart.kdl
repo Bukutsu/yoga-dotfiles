@@ -5,6 +5,5 @@
 // ────────────── iio-niri: auto screen rotation ──────────────
 spawn-sh-at-startup "i=0; while [ $i -lt 30 ]; do dbus-send --system --print-reply --dest=net.hadess.SensorProxy /net/hadess/SensorProxy org.freedesktop.DBus.Peer.Ping >/dev/null 2>&1 && exec iio-niri listen --monitor eDP-1; i=$((i+1)); sleep 1; done"
 
-// ────────────── DankMaterialShell (DMS) ──────────────
-// Alternative: systemctl --user add-wants niri.service dms
-spawn-at-startup "dms" "run"
+// DMS started via systemd: systemctl --user add-wants niri.service dms
+// Do NOT add spawn-at-startup here or it'll run twice.
