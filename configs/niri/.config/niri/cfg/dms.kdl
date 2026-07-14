@@ -10,9 +10,11 @@ binds {
     Mod+A repeat=false { spawn-sh "dms ipc call spotlight toggle"; }
     Mod+Slash repeat=false { spawn-sh "dms ipc call spotlight-bar toggle"; }
 
+    // Screenshots use native niri actions, not DMS.
+    Print { screenshot; }
+    Mod+Shift+S { screenshot-window; }
+
     // Media & hardware via DMS (OSD, better integration)
-    Print { spawn-sh "dms ipc call niri screenshot"; }
-    Mod+Shift+S { spawn-sh "dms ipc call niri screenshotWindow"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
     XF86AudioMute allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
