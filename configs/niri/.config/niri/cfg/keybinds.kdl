@@ -99,12 +99,12 @@ binds {
     Mod+O repeat=false { spawn "iio-niri" "msg" "toggle-lock-rotation"; }
 
     // System and applications
-    Mod+Escape repeat=false { spawn "loginctl" "lock-session"; }
+    Mod+Escape repeat=false { spawn-sh "dms ipc call lock lock"; }
     Mod+Shift+Escape repeat=false { spawn-sh "loginctl terminate-session \"$XDG_SESSION_ID\""; }
     Mod+Space { switch-layout "next"; }
-    Mod+A repeat=false { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+A repeat=false { spawn-sh "dms ipc call spotlight toggle"; }
     Mod+W repeat=false { toggle-overview; }
-    Mod+Slash repeat=false { spawn-sh "noctalia msg panel-toggle launcher"; }
+    Mod+Slash repeat=false { spawn-sh "dms ipc call spotlight-bar toggle"; }
     // niri cannot bind a modifier tap; use Mod+A or Mod+Slash instead.
     Mod+F repeat=false { spawn-sh "$FILE_MANAGER"; }
     Mod+T repeat=false { spawn-sh "$TERMINAL"; }
@@ -113,20 +113,20 @@ binds {
     Mod+Alt+S repeat=false { spawn "orca"; }
 
     // Media, power, and hardware. These remain usable while locked.
-    Print { screenshot; }
-    Mod+Shift+S { screenshot; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
-    XF86AudioMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    XF86AudioMicMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
-    XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
-    XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
+    Print { spawn-sh "dms ipc call niri screenshot"; }
+    Mod+Shift+S { spawn-sh "dms ipc call niri screenshotWindow"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "dms ipc call mic mute"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "dms ipc call brightness increment 5"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "dms ipc call brightness decrement 5"; }
     XF86PowerOff repeat=false { spawn "systemctl" "poweroff"; }
-    XF86TouchpadToggle { spawn-sh "noctalia msg settings-toggle"; }
-    Mod+Ctrl+XF86TouchpadToggle { spawn-sh "noctalia msg settings-toggle"; }
+    XF86TouchpadToggle { spawn-sh "dms ipc call settings toggle"; }
+    Mod+Ctrl+XF86TouchpadToggle { spawn-sh "dms ipc call settings toggle"; }
     XF86LaunchA { toggle-overview; }
 }
 
