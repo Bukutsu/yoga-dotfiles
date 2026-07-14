@@ -11,7 +11,7 @@
 output "eDP-1" {
     // Lenovo laptop built-in display
     // Transform set by iio-niri for auto-rotation; do not hardcode here.
-    mode "2880x1800@60.000"
+    mode "2880x1800@120.000"
     scale 1.75
     position x=0 y=0
 }

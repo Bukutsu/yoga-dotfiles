@@ -6,3 +6,6 @@ include "./cfg/display.kdl"
 include "./cfg/layout.kdl"
 include "./cfg/rules.kdl"
 include "./cfg/misc.kdl"
+
+// DMS integration — comment out to disable all DMS keybinds
+include "./cfg/dms.kdl"

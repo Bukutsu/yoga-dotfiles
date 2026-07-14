@@ -1,0 +1,30 @@
+// ────────────── DMS IPC overrides ──────────────
+// These replace the raw-tool keybinds from keybinds.kdl when DMS is running.
+// Include this file LAST in config.kdl so it takes precedence.
+// Comment out the include line to fall back to non-DMS bindings.
+
+binds {
+    // System
+    Mod+Escape repeat=false { spawn-sh "dms ipc call lock lock"; }
+    Mod+A repeat=false { spawn-sh "dms ipc call spotlight toggle"; }
+    Mod+Slash repeat=false { spawn-sh "dms ipc call spotlight-bar toggle"; }
+
+    // Media & hardware via DMS (OSD, better integration)
+    Print { spawn-sh "dms ipc call niri screenshot"; }
+    Mod+Shift+S { spawn-sh "dms ipc call niri screenshotWindow"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "dms ipc call mic mute"; }
+    XF86AudioPlay allow-when-locked=true { spawn-sh "dms ipc call mpris playPause"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "dms ipc call mpris previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "dms ipc call mpris next"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "dms ipc call brightness increment 5"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "dms ipc call brightness decrement 5"; }
+    XF86TouchpadToggle { spawn-sh "dms ipc call settings toggle"; }
+    Mod+Ctrl+XF86TouchpadToggle { spawn-sh "dms ipc call settings toggle"; }
+
+    // Extra DMS-only shortcuts
+    Mod+C repeat=false { spawn-sh "dms ipc call clipboard toggle"; }
+    Mod+P repeat=false { spawn-sh "dms ipc call powermenu toggle"; }
+}
