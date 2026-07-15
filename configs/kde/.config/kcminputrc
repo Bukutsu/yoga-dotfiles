@@ -1,0 +1,20 @@
+[Libinput][1267][12926][ELAN06FA:00 04F3:327E Touchpad]
+NaturalScroll=true
+PointerAcceleration=0.450
+PointerAccelerationProfile=1
+
+[Libinput][14139][4728][Compx Wireless mouse 8k dongle-L]
+PointerAcceleration=-0.750
+PointerAccelerationProfile=1
+
+[Libinput][14139][4728][Compx Wireless mouse 8k dongle-L Mouse]
+PointerAcceleration=-0.750
+PointerAccelerationProfile=1
+
+[Libinput][14139][4755][Compx ATK A9 Air]
+PointerAcceleration=-0.750
+PointerAccelerationProfile=1
+
+[Libinput][9610][268][BY Tech Gaming Keyboard Mouse]
+PointerAcceleration=-0.750
+PointerAccelerationProfile=1
