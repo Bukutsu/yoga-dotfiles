@@ -11,6 +11,7 @@ Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10
   - `configs/niri/.config/niri/` → `~/.config/niri/`
   - `configs/hypr/.config/hypr/` → `~/.config/hypr/`
   - `configs/alacritty/.config/alacritty/` → `~/.config/alacritty/`
+  - `configs/kde/` → `~/`
 - **scripts/** — Automation tools
 
 ## Quick Start
@@ -33,6 +34,10 @@ cp -r configs/hypr/.config/hypr ~/.config/
 
 # Alacritty
 cp -r configs/alacritty/.config/alacritty ~/.config/
+
+# KDE Plasma (Log out first to prevent settings from being overwritten on exit)
+cp -r configs/kde/.config/. ~/.config/
+cp -r configs/kde/.local/. ~/.local/
 
 # iio-niri starts with Niri from config.kdl; restart the session to apply.
 ```
