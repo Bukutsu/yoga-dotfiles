@@ -1,5 +1,5 @@
 default_sched = "scx_lavd"
-default_mode = "Powersave"
+default_mode = "PowerSave"
 
 [scheds.scx_tickless]
 auto_mode = []
