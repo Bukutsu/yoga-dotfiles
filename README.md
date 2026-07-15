@@ -6,7 +6,8 @@ Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10
 
 - **docs/** — Setup guides and hardware notes
 - **configs/** — Config files mirroring their target paths
-  - `configs/system/` → `/etc/`
+  - `configs/system/etc/` → `/etc/`
+  - `configs/system/usr/` → `/usr/`
   - `configs/niri/.config/niri/` → `~/.config/niri/`
   - `configs/hypr/.config/hypr/` → `~/.config/hypr/`
   - `configs/alacritty/.config/alacritty/` → `~/.config/alacritty/`
@@ -22,7 +23,7 @@ cd Yoga-7-14AKP10-Linux-Config
 cat docs/INSTALL_GUIDE.md
 
 # System configs (/etc/)
-sudo cp -r configs/system/* /etc/
+sudo cp -r configs/system/etc/. /etc/
 
 # Niri + iio-niri
 cp -r configs/niri/.config/niri ~/.config/

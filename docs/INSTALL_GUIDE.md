@@ -102,8 +102,9 @@ sudo systemctl enable --now scx_loader
 
 ## Phase 7: Optional: Deploy WiFi Stability Fix
 ```bash
-git clone https://github.com/Bukutsu/Yoga-7-14AKP10-Linux-Config.git
-sudo cp Yoga-7-14AKP10-Linux-Config/configs/system/network/disable-wifi-powersave.conf /etc/NetworkManager/conf.d/
+sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powersave.conf \
+  /etc/NetworkManager/conf.d/disable-wifi-powersave.conf
+sudo systemctl restart NetworkManager
 ```
 
 ---
