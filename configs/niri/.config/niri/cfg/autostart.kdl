@@ -1,3 +1,4 @@
 // ────────────── iio-niri: auto screen rotation ──────────────
 // Lenovo Yoga built-in display; follows the upstream iio-niri configuration.
-spawn-at-startup "iio-niri" "listen" "--monitor" "eDP-1"
+// SensorProxy can be ready before the accelerometer appears; retry startup for 30 seconds.
+spawn-sh-at-startup "i=0; while [ $i -lt 30 ]; do busctl --system get-property net.hadess.SensorProxy /net/hadess/SensorProxy net.hadess.SensorProxy HasAccelerometer 2>/dev/null | grep -qx 'b true' && exec iio-niri listen --monitor eDP-1; i=$((i+1)); sleep 1; done"
