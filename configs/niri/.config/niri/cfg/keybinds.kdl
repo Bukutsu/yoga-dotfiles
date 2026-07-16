@@ -75,8 +75,8 @@ binds {
 
     // Window operations
     Mod+Q repeat=false { close-window; }
-    // Enlarge the focused column into the remaining available space, without maximize-to-edges state.
-    Mod+M repeat=false { expand-column-to-available-width; }
+    // Toggle the focused column to full width, without maximize-to-edges state.
+    Mod+M repeat=false { maximize-column; }
     Mod+F11 repeat=false { fullscreen-window; }
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-column-width-back; }
