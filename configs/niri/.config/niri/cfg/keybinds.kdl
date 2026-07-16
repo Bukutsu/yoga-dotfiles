@@ -110,6 +110,7 @@ binds {
     F24 repeat=false { spawn-sh "$TERMINAL"; } // Copilot key mapped via keyd
     Mod+B repeat=false { spawn-sh "$BROWSER"; }
     Mod+Alt+S repeat=false { spawn "orca"; }
+    Mod+Ctrl+Z repeat=false { spawn "wooz" "--mouse-track"; }
 
     // Media, power, and hardware (shell-independent fallbacks)
     Print { screenshot; }
