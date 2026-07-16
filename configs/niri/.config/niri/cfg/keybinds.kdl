@@ -110,8 +110,6 @@ binds {
     Mod+Return repeat=false { spawn-sh "$TERMINAL"; }
     F24 repeat=false { spawn-sh "$TERMINAL"; } // Copilot key mapped via keyd
     Mod+B repeat=false { spawn-sh "$BROWSER"; }
-    // Toggle Woomer; use mouse scroll to zoom and left-drag to pan.
-    Mod+Ctrl+Z repeat=false { spawn-sh "pgrep -x woomer >/dev/null && pkill -x woomer || woomer"; }
 
     // Media, power, and hardware (shell-independent fallbacks)
     Print { screenshot; }

@@ -78,7 +78,6 @@ Ensure these are installed for all keybinds and hardware configs to work:
 ### Utilities & Media
 - **Screenshot Stack:** `grim`, `slurp`, `satty`
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
-- **Accessibility:** `woomer` (Wayland zoom; `Mod+Ctrl+Z`)
 
 ## License
 
