@@ -75,7 +75,8 @@ binds {
 
     // Window operations
     Mod+Q repeat=false { close-window; }
-    Mod+M repeat=false { maximize-window-to-edges; }
+    // Enlarge the focused column into the remaining available space, without maximize-to-edges state.
+    Mod+M repeat=false { expand-column-to-available-width; }
     Mod+F11 repeat=false { fullscreen-window; }
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-column-width-back; }
@@ -110,6 +111,8 @@ binds {
     F24 repeat=false { spawn-sh "$TERMINAL"; } // Copilot key mapped via keyd
     Mod+B repeat=false { spawn-sh "$BROWSER"; }
     Mod+Alt+S repeat=false { spawn "orca"; }
+    // Toggle Woomer; use mouse scroll to zoom and left-drag to pan.
+    Mod+Ctrl+Z repeat=false { spawn-sh "pgrep -x woomer >/dev/null && pkill -x woomer || woomer"; }
 
     // Media, power, and hardware (shell-independent fallbacks)
     Print { screenshot; }

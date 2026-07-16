@@ -16,8 +16,8 @@
     }
 
     cursor {
-        xcursor-theme "capitaine-cursors"
-        xcursor-size 32
+        xcursor-theme "Breeze_Light"
+        xcursor-size 24
     }
 
     hotkey-overlay {
