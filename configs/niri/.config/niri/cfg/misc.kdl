@@ -4,8 +4,8 @@
     environment {
         // Default Applications
         TERMINAL "kitty"
-        BROWSER "helium-browser"
-        FILE_MANAGER "nautilus"
+        BROWSER "zen-browser"
+        FILE_MANAGER "dolphin"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
         QT_QPA_PLATFORM "wayland"
