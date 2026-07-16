@@ -1,0 +1,45 @@
+// ────────────── Noctalia v5 integration ──────────────
+// https://docs.noctalia.dev/v5/compositor-settings/niri/
+
+spawn-at-startup "noctalia"
+
+// Keep the stationary Noctalia wallpaper visible behind Niri workspaces.
+layer-rule {
+    match namespace="^noctalia-wallpaper"
+    place-within-backdrop true
+}
+
+// Float Noctalia's settings window.
+window-rule {
+    match app-id="dev.noctalia.Noctalia"
+    open-floating true
+    default-column-width { fixed 1080; }
+    default-window-height { fixed 920; }
+}
+
+debug {
+    // Allows notification actions and window activation from Noctalia.
+    honor-xdg-activation-with-invalid-serial
+}
+
+binds {
+    // Core shell controls. These avoid existing Niri bindings from the docs.
+    Mod+A repeat=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+Slash repeat=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
+    Mod+I repeat=false { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
+    Mod+Shift+I repeat=false { spawn "noctalia" "msg" "settings-toggle"; }
+    Mod+C repeat=false { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
+    Mod+P repeat=false { spawn "noctalia" "msg" "panel-toggle" "session"; }
+    Mod+Escape repeat=false { spawn "noctalia" "msg" "session" "lock"; }
+
+    // Media and hardware controls use Noctalia for OSD feedback.
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-down"; }
+    XF86AudioMute allow-when-locked=true { spawn "noctalia" "msg" "volume-mute"; }
+    XF86AudioMicMute allow-when-locked=true { spawn "noctalia" "msg" "mic-mute"; }
+    XF86AudioPlay allow-when-locked=true { spawn "noctalia" "msg" "media" "toggle"; }
+    XF86AudioPrev allow-when-locked=true { spawn "noctalia" "msg" "media" "previous"; }
+    XF86AudioNext allow-when-locked=true { spawn "noctalia" "msg" "media" "next"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "noctalia" "msg" "brightness-up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "noctalia" "msg" "brightness-down"; }
+}

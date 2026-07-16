@@ -1,10 +1,3 @@
-// ────────────── Noctalia (deprecated in favor of DMS) ──────────────
-//spawn-at-startup "noctalia"
-//spawn-sh-at-startup "qs -c noctalia-shell"
-
 // ────────────── iio-niri: auto screen rotation ──────────────
 // Lenovo Yoga built-in display; follows the upstream iio-niri configuration.
 spawn-at-startup "iio-niri" "listen" "--monitor" "eDP-1"
-
-// DMS started via systemd: systemctl --user add-wants niri.service dms
-// Do NOT add spawn-at-startup here or it'll run twice.

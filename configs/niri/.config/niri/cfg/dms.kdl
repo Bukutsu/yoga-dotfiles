@@ -1,7 +1,7 @@
-// ────────────── DMS IPC overrides ──────────────
-// These replace the raw-tool keybinds from keybinds.kdl when DMS is running.
-// Include this file LAST in config.kdl so it takes precedence.
-// Comment out the include line to fall back to non-DMS bindings.
+// ────────────── DMS integration ──────────────
+// Enable only this file or noctalia.kdl in config.kdl, then restart Niri.
+
+spawn-at-startup "dms" "run" "--session"
 
 binds {
     // System
@@ -10,11 +10,11 @@ binds {
     Mod+A repeat=false { spawn-sh "dms ipc call spotlight toggle"; }
     Mod+Slash repeat=false { spawn-sh "dms ipc call spotlight-bar toggle"; }
 
-    // Screenshots use native niri actions, not DMS.
+    // Screenshots use native Niri actions.
     Print { screenshot; }
     Mod+Shift+S { screenshot; }
 
-    // Media & hardware via DMS (OSD, better integration)
+    // Media and hardware via DMS for OSD feedback.
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "dms ipc call audio increment 5"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "dms ipc call audio decrement 5"; }
     XF86AudioMute allow-when-locked=true { spawn-sh "dms ipc call audio mute"; }
@@ -27,7 +27,6 @@ binds {
     XF86TouchpadToggle { spawn-sh "dms ipc call settings toggle"; }
     Mod+Ctrl+XF86TouchpadToggle { spawn-sh "dms ipc call settings toggle"; }
 
-    // Extra DMS-only shortcuts
     Mod+C repeat=false { spawn-sh "dms ipc call clipboard toggle"; }
     Mod+P repeat=false { spawn-sh "dms ipc call powermenu toggle"; }
 }
