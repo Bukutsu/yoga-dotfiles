@@ -78,7 +78,7 @@ Ensure these are installed for all keybinds and hardware configs to work:
 ### Utilities & Media
 - **Screenshot Stack:** `grim`, `slurp`, `satty`
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
-- **Accessibility:** `orca` (screen reader), `wooz` (desktop magnifier; `Mod+Ctrl+Z`)
+- **Accessibility:** `orca` (screen reader)
 
 ## License
 
