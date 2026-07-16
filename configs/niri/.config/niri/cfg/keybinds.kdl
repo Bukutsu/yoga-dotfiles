@@ -110,6 +110,8 @@ binds {
     F24 repeat=false { spawn-sh "$TERMINAL"; } // Copilot key mapped via keyd
     Mod+B repeat=false { spawn-sh "$BROWSER"; }
     Mod+Alt+S repeat=false { spawn "orca"; }
+    // Toggle Shmooz; use mouse scroll to zoom and Esc/right-click to exit.
+    Mod+Ctrl+Z repeat=false { spawn-sh "pgrep -x shmooz >/dev/null && pkill -x shmooz || shmooz --zoom-in 10%"; }
 
     // Media, power, and hardware (shell-independent fallbacks)
     Print { screenshot; }
