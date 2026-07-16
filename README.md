@@ -60,6 +60,26 @@ cp -r configs/kde/.local/. ~/.local/
 - WiFi: Realtek RTL8922AE
 - Display: 14" 2.8K OLED 120Hz (with X-Rite factory color profile)
 
+## Dependencies
+
+Ensure these are installed for all keybinds and hardware configs to work:
+
+### Core & Shell
+- **Compositors:** `niri`, `hyprland`, `plasma-desktop`
+- **Shell/UI:** `noctalia` (primary panel/launcher), `dms` (alternative)
+- **Terminal/Files:** `alacritty`, `kitty`, `dolphin`
+
+### Hardware & System
+- **Auto-rotate:** `iio-sensor-proxy`, `iio-niri`, `iio-hyprland`
+- **Key Remapping (Copilot Key):** `keyd`
+- **Scheduling:** `scx-scheds` (for `scx_loader`)
+- **Audio Tuning:** `easyeffects`
+
+### Utilities & Media
+- **Screenshot Stack:** `grim`, `slurp`, `satty`
+- **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
+- **Accessibility:** `orca` (screen reader)
+
 ## License
 
 MIT — See [LICENSE](LICENSE)
