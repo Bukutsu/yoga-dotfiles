@@ -56,7 +56,17 @@ binds {
     Mod+Ctrl+Shift+L { move-column-to-workspace-down; }
 
     // Displays
-    Mod+Alt+I repeat=false { spawn-sh "action=$(niri msg -j outputs | jq -r 'if .[\"eDP-1\"].logical == null then \"on\" elif ([.[] | select(.logical)] | length) > 1 then \"off\" else empty end'); [ -z \"$action\" ] || niri msg output eDP-1 \"$action\""; }
+    Mod+Alt+I repeat=false {
+        spawn-sh r#"
+            action=$(niri msg -j outputs | jq -r '
+                if .["eDP-1"].logical == null then "on"
+                elif ([.[] | select(.logical)] | length) > 1 then "off"
+                else empty
+                end
+            ')
+            [ -z "$action" ] || niri msg output eDP-1 "$action"
+        "#
+    }
     Mod+Alt+Left  { focus-monitor-left; }
     Mod+Alt+Down  { focus-monitor-down; }
     Mod+Alt+Up    { focus-monitor-up; }
