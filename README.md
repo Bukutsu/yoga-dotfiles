@@ -60,6 +60,10 @@ cp -r configs/kde/.local/. ~/.local/
 - WiFi: Realtek RTL8922AE
 - Display: 14" 2.8K OLED 120Hz (with X-Rite factory color profile)
 
+## Niri shortcuts
+
+- `Mod+Alt+I` — toggle the built-in `eDP-1` display (requires `jq`)
+
 ## Dependencies
 
 Ensure these are installed for all keybinds and hardware configs to work:
@@ -78,6 +82,7 @@ Ensure these are installed for all keybinds and hardware configs to work:
 ### Utilities & Media
 - **Screenshot Stack:** `grim`, `slurp`, `satty`
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
+- **Config scripting:** `jq`
 
 ## License
 
