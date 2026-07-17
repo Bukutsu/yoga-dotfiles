@@ -11,6 +11,7 @@ Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10
   - `configs/niri/.config/niri/` → `~/.config/niri/`
   - `configs/hypr/.config/hypr/` → `~/.config/hypr/`
   - `configs/alacritty/.config/alacritty/` → `~/.config/alacritty/`
+  - `configs/noctalia/.config/noctalia/` → `~/.config/noctalia/`
   - `configs/kde/` → `~/`
 - **scripts/** — Automation tools
 
@@ -28,6 +29,9 @@ sudo cp -r configs/system/etc/. /etc/
 
 # Niri + iio-niri
 cp -r configs/niri/.config/niri ~/.config/
+
+# Noctalia
+cp -r configs/noctalia/.config/noctalia ~/.config/
 
 # Hyprland
 cp -r configs/hypr/.config/hypr ~/.config/
@@ -80,11 +84,10 @@ Ensure these are installed for all keybinds and hardware configs to work:
 - **Audio Tuning:** `easyeffects`
 
 ### Utilities & Media
-- **Screenshot Stack:** `grim`, `slurp`, `satty`
+- **Screenshot:** `noctalia` (wlr-screencopy) + `satty` (annotation)
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
 - **Config scripting:** `jq`
 
 ## License
 
 MIT — See [LICENSE](LICENSE)
-

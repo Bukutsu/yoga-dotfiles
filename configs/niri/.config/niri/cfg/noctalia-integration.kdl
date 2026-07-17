@@ -22,6 +22,11 @@ debug {
     honor-xdg-activation-with-invalid-serial
 }
 
+// Lock and suspend on lid close. Requires HandleLidSwitch=ignore in logind.conf.
+switch-events {
+    lid-close { spawn "noctalia" "msg" "session" "lock-and-suspend"; }
+}
+
 binds {
     // Core shell controls. These avoid existing Niri bindings from the docs.
     Mod+A repeat=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }

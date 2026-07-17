@@ -1,0 +1,5 @@
+# Save to ~/Pictures AND pipe to satty for annotation.
+[shell.screenshot]
+save_to_file      = true
+pipe_to_command   = true
+pipe_command      = "satty -f -"
