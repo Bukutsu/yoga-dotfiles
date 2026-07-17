@@ -1,0 +1,36 @@
+# ── Bar ──
+[bar.default]
+background_opacity = 0.85
+margin_ends = 8
+
+# ── Shell ──
+[shell]
+niri_overview_type_to_launch_enabled = true
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.launcher]
+    session_search = true
+
+    [shell.panel]
+    transparency_mode = "glass"
+
+# ── Dock ──
+[dock]
+smart_auto_hide = true
+
+# ── Brightness ──
+[brightness]
+enable_ddcutil = true
+
+# ── OSD ──
+[osd.kinds]
+media = false
+
+# ── Theme ──
+[theme]
+builtin = "Tokyo-Night"
+
+    [theme.templates]
+    builtin_ids = ["gtk3", "gtk4", "kcolorscheme", "niri", "qt"]
+    community_ids = ["zen-browser"]
