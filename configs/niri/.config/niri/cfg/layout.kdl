@@ -3,6 +3,8 @@ layout {
     center-focused-column "never"
     background-color "transparent"
 
+    default-column-width { proportion 0.66667; }
+
     preset-column-widths {
         proportion 0.33333
         proportion 0.5

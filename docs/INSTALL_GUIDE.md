@@ -109,14 +109,36 @@ sudo systemctl restart NetworkManager
 
 ---
 
-## Phase 8: Verification
+## Phase 8: Set Papirus-Dark Icons (Niri)
+Niri does not provide its own icon setting. GTK/GSettings controls GTK applications, and the Niri config makes Qt use the GTK platform theme.
+
+Install and select Papirus-Dark:
+```bash
+sudo pacman -S papirus-icon-theme
+gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+```
+
+If GTK settings files already exist, keep them consistent:
+```bash
+for version in 3.0 4.0; do
+  settings="$HOME/.config/gtk-$version/settings.ini"
+  [ -f "$settings" ] || continue
+  sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=Papirus-Dark/' "$settings"
+done
+```
+
+The KDE config in this repository also selects `Papirus-Dark` in `kdeglobals`. Restart open applications after changing the theme.
+
+---
+
+## Phase 9: Verification
 1. **Idle Power**: `sudo powertop` → **Target: 3–4W**
 2. **YouTube**: Play 1080p video → **Target: 6–7W**
 3. **Scheduler**: `scx_loader status` or check in `scx-manager`.
 
 ---
 
-## Phase 9: Hardware Polish (Optional)
+## Phase 10: Hardware Polish (Optional)
 
 ### Windows Hello-style Face Unlock (IR Camera)
 The Yoga 7 features a hardware Infrared camera that works perfectly on Linux for facial recognition authentication (sudo, login, lock screen).
