@@ -34,3 +34,5 @@ limine_output.txt
 .env.local
 secrets/
 niri-docs/
+niri-wiki/
+noctalia-wiki/

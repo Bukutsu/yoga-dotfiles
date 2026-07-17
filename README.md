@@ -50,7 +50,6 @@ cp -r configs/kde/.local/. ~/.local/
 
 - [INSTALL_GUIDE.md](docs/INSTALL_GUIDE.md) — Fresh installation
 - [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) — Speaker and EasyEffects setup
-- [BIOPASS_PAM_SETUP.md](docs/BIOPASS_PAM_SETUP.md) — Face authentication
 - [COLOR_MANAGEMENT.md](docs/COLOR_MANAGEMENT.md) — Display color profile configuration
 - [COPILOT_KEY.md](docs/COPILOT_KEY.md) — Copilot key remap via keyd for KDE
 - [TRANSFORM_TO_ARCH.md](docs/TRANSFORM_TO_ARCH.md) — CachyOS to Arch migration
