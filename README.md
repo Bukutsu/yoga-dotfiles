@@ -2,49 +2,96 @@
 
 Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10) running Arch Linux.
 
-## Contents
+## Apply the configs
 
-- **docs/** — Setup guides and hardware notes
-- **configs/** — Config files mirroring their target paths
-  - `configs/system/etc/` → `/etc/`
-  - `configs/system/usr/` → `/usr/`
-  - `configs/niri/.config/niri/` → `~/.config/niri/`
-  - `configs/hypr/.config/hypr/` → `~/.config/hypr/`
-  - `configs/alacritty/.config/alacritty/` → `~/.config/alacritty/`
-  - `configs/noctalia/.config/noctalia/` → `~/.config/noctalia/`
-  - `configs/kde/` → `~/`
-- **scripts/** — Automation tools
-
-## Quick Start
+Clone the repository, enter it, then apply only the sections you use:
 
 ```bash
 git clone https://github.com/Bukutsu/yoga-dotfiles.git
-cd Yoga-7-14AKP10-Linux-Config
+cd yoga-dotfiles
+```
 
-# Read the relevant guide first
-cat docs/INSTALL_GUIDE.md
+Existing files at the destinations are overwritten, so back them up first.
 
-# System configs (/etc/)
-sudo cp -r configs/system/etc/. /etc/
+### Desktop configs
 
-# Niri + iio-niri
-cp -r configs/niri/.config/niri ~/.config/
+```bash
+# Niri and DankMaterialShell themes
+cp -r configs/niri/.config/. ~/.config/
 
 # Noctalia
-cp -r configs/noctalia/.config/noctalia ~/.config/
+cp -r configs/noctalia/.config/. ~/.config/
 
 # Hyprland
-cp -r configs/hypr/.config/hypr ~/.config/
+cp -r configs/hypr/.config/. ~/.config/
 
 # Alacritty
-cp -r configs/alacritty/.config/alacritty ~/.config/
+cp -r configs/alacritty/.config/. ~/.config/
 
-# KDE Plasma (Log out first to prevent settings from being overwritten on exit)
+# Kitty
+mkdir -p ~/.config/kitty
+cp configs/kitty/* ~/.config/kitty/
+```
+
+Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `iio-niri` from `config.kdl`.
+
+### KDE Plasma
+
+Log out of Plasma first so it does not overwrite the copied settings, then run from a TTY or another desktop:
+
+```bash
 cp -r configs/kde/.config/. ~/.config/
 cp -r configs/kde/.local/. ~/.local/
-
-# iio-niri starts with Niri from config.kdl; restart the session to apply.
 ```
+
+Log back in to apply the settings and bundled look-and-feel themes.
+
+### System configs
+
+Apply these individually rather than copying all of `configs/system`:
+
+```bash
+# Copilot key remap
+sudo install -Dm644 configs/system/etc/keyd/default.conf /etc/keyd/default.conf
+sudo systemctl enable --now keyd
+
+# Disable NetworkManager Wi-Fi power saving
+sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powersave.conf \
+  /etc/NetworkManager/conf.d/disable-wifi-powersave.conf
+sudo systemctl restart NetworkManager
+
+# scx_loader scheduler configuration
+sudo install -Dm644 configs/system/etc/scx_loader.toml /etc/scx_loader.toml
+sudo systemctl enable --now scx_loader
+
+# Factory display color profile
+sudo install -Dm644 configs/system/usr/share/color/icc/colord/Yoga14AKp10.icm \
+  /usr/share/color/icc/colord/Yoga14AKp10.icm
+```
+
+Select the installed ICC profile in your desktop's color settings; see [COLOR_MANAGEMENT.md](docs/COLOR_MANAGEMENT.md). The key remap also requires `keyd`; see [COPILOT_KEY.md](docs/COPILOT_KEY.md).
+
+### EasyEffects audio presets
+
+```bash
+mkdir -p ~/.config/easyeffects/{irs,output}
+cp configs/audio/easyeffects_irs/* ~/.config/easyeffects/irs/
+cp configs/audio/easyeffects_presets/*.json ~/.config/easyeffects/output/
+cp configs/audio/easyeffects_presets/ThinkPad_Z16_Dolby/*.json ~/.config/easyeffects/output/
+```
+
+Open EasyEffects and load one preset. See [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) for the differences.
+
+### Fontconfig and Flatpak fonts
+
+Use the included script; it installs the files under `configs/fontconfig` and configures Flatpak access:
+
+```bash
+./scripts/setup-flatpak-fonts.sh sync
+./scripts/setup-flatpak-fonts.sh state   # verify
+```
+
+Run `./scripts/setup-flatpak-fonts.sh unsync` to remove it.
 
 ## Docs
 
