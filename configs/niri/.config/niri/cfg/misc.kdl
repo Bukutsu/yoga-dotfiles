@@ -4,7 +4,7 @@
     environment {
         // Default Applications
         TERMINAL "kitty"
-        BROWSER "zen-browser"
+        BROWSER "helium-browser"
         FILE_MANAGER "thunar"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
