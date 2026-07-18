@@ -1,7 +1,7 @@
 // ────────────── DMS integration ──────────────
 // Enable only this file or noctalia.kdl in config.kdl, then restart Niri.
 
-spawn-at-startup "dms" "run" "--session"
+//spawn-at-startup "dms" "run" "--session"
 
 binds {
     // System

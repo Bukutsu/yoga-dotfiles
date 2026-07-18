@@ -12,4 +12,4 @@ include optional=true "noctalia.kdl"
 
 // Desktop shell: enable exactly one, then restart Niri.
 include "./cfg/noctalia-integration.kdl"
-// include "./cfg/dms.kdl"
+//include "./cfg/dms.kdl"
