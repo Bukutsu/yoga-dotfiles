@@ -347,7 +347,7 @@ install_logic() {
         fi
     fi
 
-    local repo_conf_file="$repo_root/configs/fontconfig/conf.d/99-$lang-fonts.conf"
+    local repo_conf_file="$repo_root/configs/.config/fontconfig/conf.d/99-$lang-fonts.conf"
 
     if [[ -f "$repo_conf_file" ]]; then
         echo "Found existing config in repository: $repo_conf_file"
@@ -520,7 +520,7 @@ sync_is_installed() {
 
 write_sync_conf() {
     local target="$HOME/.config/fontconfig/conf.d/$SYNC_FILE_NAME"
-    local repo_template="$REPO_ROOT/configs/fontconfig/conf.d/$SYNC_FILE_NAME"
+    local repo_template="$REPO_ROOT/configs/.config/fontconfig/conf.d/$SYNC_FILE_NAME"
     mkdir -p "$(dirname "$target")"
 
     if [[ -f "$repo_template" ]]; then

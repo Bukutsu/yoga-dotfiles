@@ -18,8 +18,8 @@ mkdir -p ~/.config/easyeffects/irs
 mkdir -p ~/.config/easyeffects/output
 
 # Copy Dolby presets and impulse responses
-cp yoga-dotfiles/configs/audio/easyeffects_irs/Dolby-Dynamic-Balanced.irs ~/.config/easyeffects/irs/
-cp yoga-dotfiles/configs/audio/easyeffects_presets/ThinkPad_Z16_Dolby/Z16-Dynamic-Balanced.json ~/.config/easyeffects/output/
+cp yoga-dotfiles/configs/.config/easyeffects/irs/Dolby-Dynamic-Balanced.irs ~/.config/easyeffects/irs/
+cp yoga-dotfiles/configs/.config/easyeffects/output/ThinkPad_Z16_Dolby/Z16-Dynamic-Balanced.json ~/.config/easyeffects/output/
 ```
 
 **Load:**
@@ -41,7 +41,7 @@ Industry-standard flat response tuning using parametric EQ. No convolver; lightw
 
 **Installation:**
 ```bash
-cp yoga-dotfiles/configs/audio/easyeffects_presets/Yoga_7_Harman_Target.json ~/.config/easyeffects/output/
+cp yoga-dotfiles/configs/.config/easyeffects/output/Yoga_7_Harman_Target.json ~/.config/easyeffects/output/
 ```
 
 **Load:**

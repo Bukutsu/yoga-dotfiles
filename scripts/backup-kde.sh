@@ -5,8 +5,8 @@
 set -euo pipefail
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-DEST_CONFIG="$REPO_ROOT/configs/kde/.config"
-DEST_SHARE="$REPO_ROOT/configs/kde/.local/share"
+DEST_CONFIG="$REPO_ROOT/configs/.config"
+DEST_SHARE="$REPO_ROOT/configs/.local/share"
 
 mkdir -p "$DEST_CONFIG"
 mkdir -p "$DEST_SHARE/plasma/look-and-feel"
@@ -29,4 +29,4 @@ if [ -d "$HOME/.local/share/plasma/look-and-feel" ]; then
     cp -pr "$HOME"/.local/share/plasma/look-and-feel/* "$DEST_SHARE/plasma/look-and-feel/"
 fi
 
-echo "KDE configuration backed up to $REPO_ROOT/configs/kde"
+echo "KDE configuration backed up to $REPO_ROOT/configs"

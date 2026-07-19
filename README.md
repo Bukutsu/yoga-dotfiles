@@ -13,38 +13,49 @@ cd yoga-dotfiles
 
 Existing files at the destinations are overwritten, so back them up first.
 
-### Desktop configs
+### User configs
+
+Copy all configuration directories to your system:
 
 ```bash
-# Niri and DankMaterialShell themes
-cp -r configs/niri/.config/. ~/.config/
+# Copy all desktop configuration files
+cp -r configs/.config/. ~/.config/
+
+# Copy all user-level local files (including custom KDE global layouts)
+cp -r configs/.local/. ~/.local/
+```
+
+Alternatively, copy individual configurations:
+
+```bash
+# Niri & DankMaterialShell
+cp -r configs/.config/niri ~/.config/
+cp -r configs/.config/DankMaterialShell ~/.config/
 
 # Noctalia
-cp -r configs/noctalia/.config/. ~/.config/
+cp -r configs/.config/noctalia ~/.config/
 
 # Hyprland
-cp -r configs/hypr/.config/. ~/.config/
+cp -r configs/.config/hypr ~/.config/
 
 # Alacritty
-cp -r configs/alacritty/.config/. ~/.config/
+cp -r configs/.config/alacritty ~/.config/
 
 # Kitty
-mkdir -p ~/.config/kitty
-cp configs/kitty/* ~/.config/kitty/
+cp -r configs/.config/kitty ~/.config/
+
+# MIME default applications
+cp configs/.config/mimeapps.list ~/.config/mimeapps.list
+
+# EasyEffects audio presets
+cp -r configs/.config/easyeffects ~/.config/
 ```
 
 Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `iio-niri` from `config.kdl`.
 
 ### KDE Plasma
 
-Log out of Plasma first so it does not overwrite the copied settings, then run from a TTY or another desktop:
-
-```bash
-cp -r configs/kde/.config/. ~/.config/
-cp -r configs/kde/.local/. ~/.local/
-```
-
-Log back in to apply the settings and bundled look-and-feel themes.
+Log out of Plasma first so it does not overwrite the copied settings, then copy the user configurations (`.config` and `.local`) from a TTY or another desktop session. Log back in to apply.
 
 ### System configs
 
@@ -73,18 +84,11 @@ Select the installed ICC profile in your desktop's color settings; see [COLOR_MA
 
 ### EasyEffects audio presets
 
-```bash
-mkdir -p ~/.config/easyeffects/{irs,output}
-cp configs/audio/easyeffects_irs/* ~/.config/easyeffects/irs/
-cp configs/audio/easyeffects_presets/*.json ~/.config/easyeffects/output/
-cp configs/audio/easyeffects_presets/ThinkPad_Z16_Dolby/*.json ~/.config/easyeffects/output/
-```
-
 Open EasyEffects and load one preset. See [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) for the differences.
 
 ### Fontconfig and Flatpak fonts
 
-Use the included script; it installs the files under `configs/fontconfig` and configures Flatpak access:
+Use the included script; it installs the files under `configs/.config/fontconfig` and configures Flatpak access:
 
 ```bash
 ./scripts/setup-flatpak-fonts.sh sync
