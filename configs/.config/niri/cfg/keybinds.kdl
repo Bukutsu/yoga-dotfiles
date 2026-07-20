@@ -111,7 +111,7 @@ binds {
     Mod+O repeat=false { spawn "iio-niri" "msg" "toggle-lock-rotation"; }
 
     // System and applications (shell-independent fallbacks)
-    Mod+Shift+Escape repeat=false { spawn-sh "loginctl terminate-session \"$XDG_SESSION_ID\""; }
+    Mod+Shift+Escape repeat=false { spawn "noctalia" "msg" "session" "logout"; }
     Mod+Space { switch-layout "next"; }
     // Mod+A and Mod+Slash are reserved for shell launcher overrides.
     Mod+W repeat=false { toggle-overview; }
@@ -133,6 +133,6 @@ binds {
     XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
-    XF86PowerOff repeat=false { spawn "systemctl" "poweroff"; }
+    XF86PowerOff repeat=false { spawn "noctalia" "msg" "session" "shutdown"; }
     XF86LaunchA { toggle-overview; }
 }
