@@ -32,6 +32,9 @@ Alternatively, copy individual configurations:
 cp -r configs/.config/niri ~/.config/
 cp -r configs/.config/DankMaterialShell ~/.config/
 
+# Niri ambient-light auto-brightness (wluma)
+cp -r configs/.config/wluma ~/.config/
+
 # Noctalia
 cp -r configs/.config/noctalia ~/.config/
 
@@ -51,7 +54,7 @@ cp configs/.config/mimeapps.list ~/.config/mimeapps.list
 cp -r configs/.config/easyeffects ~/.config/
 ```
 
-Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `iio-niri` from `config.kdl`.
+Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `wluma` and `iio-niri` from `config.kdl`. `wluma` learns your preferred brightness after several manual adjustments in different lighting conditions.
 
 ### KDE Plasma
 
@@ -117,7 +120,18 @@ Run `./scripts/setup-fonts.sh unfix` to remove host fixes or `unsync` to remove 
 
 ## Niri shortcuts
 
+- `Mod+A` / `Mod+/` — Noctalia launcher
+- `Mod+I` — Noctalia control center
+- `Mod+Shift+I` — Noctalia settings
+- `Mod+C` — Noctalia clipboard
+- `Mod+Escape` — Noctalia session panel
+- `Mod+P` — cycle power profile
+- `Mod+Shift+Escape` — log out
+- `Print` — fullscreen screenshot
+- `Mod+Shift+S` — region screenshot
 - `Mod+Alt+I` — toggle the built-in `eDP-1` display (requires `jq`)
+
+Noctalia-specific bindings live in `configs/.config/niri/cfg/noctalia-integration.kdl`.
 
 ## Dependencies
 
@@ -130,6 +144,7 @@ Ensure these are installed for all keybinds and hardware configs to work:
 
 ### Hardware & System
 - **Auto-rotate:** `iio-sensor-proxy`, `iio-niri`, `iio-hyprland`
+- **Auto-brightness:** `wluma`, `iio-sensor-proxy`
 - **Key Remapping (Copilot Key):** `keyd`
 - **Scheduling:** `scx-scheds` (for `scx_loader`)
 - **Audio Tuning:** `easyeffects`
