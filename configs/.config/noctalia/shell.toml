@@ -1,3 +1,0 @@
-# Launch apps as transient systemd scopes so they survive a Noctalia restart.
-[shell]
-launch_apps_as_systemd_services = true
