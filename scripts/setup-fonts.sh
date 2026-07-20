@@ -48,21 +48,28 @@ sync_is_installed() {
     [[ -f "$HOME/.config/fontconfig/conf.d/$SYNC_FILE_NAME" ]]
 }
 
-write_general_font_fixes() {
-    local target="$HOME/.config/fontconfig/conf.d/$GENERAL_FILE_NAME"
-    local repo_template="$REPO_ROOT/configs/.config/fontconfig/conf.d/$GENERAL_FILE_NAME"
+# Write a fontconfig conf file from repo template or inline fallback.
+# Usage: write_conf <filename> [fallback-content]
+write_conf() {
+    local filename="$1" fallback="$2"
+    local target="$HOME/.config/fontconfig/conf.d/$filename"
+    local repo_template="$REPO_ROOT/configs/.config/fontconfig/conf.d/$filename"
     mkdir -p "$(dirname "$target")"
 
     if [[ -f "$repo_template" ]]; then
-        if [[ -f "$target" ]] && cmp -s "$repo_template" "$target"; then
-            echo "  General font fixes already up to date: $target"
+        if cmp -s "$repo_template" "$target" 2>/dev/null; then
+            echo "  Already up to date: $target"
         else
             cp "$repo_template" "$target"
-            echo "  Wrote general font fixes: $target"
+            echo "  Wrote: $target"
         fi
     else
-        cat > "$target" <<'EOFFIX'
-<?xml version="1.0"?>
+        printf '%s\n' "$fallback" > "$target"
+        echo "  Wrote: $target"
+    fi
+}
+
+GENERAL_FALLBACK='<?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
 <fontconfig>
   <!-- Force system-ui to use Noto Sans -->
@@ -83,15 +90,19 @@ write_general_font_fixes() {
       <pattern><patelt name="family"><string>Sarabun</string></patelt></pattern>
     </rejectfont>
   </selectfont>
-</fontconfig>
-EOFFIX
-        echo "  Wrote general font fixes: $target"
-    fi
-}
+</fontconfig>'
+
+SYNC_FALLBACK='<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+  <dir>/run/host/usr/share/fonts</dir>
+  <dir prefix="xdg">fonts</dir>
+  <include ignore_missing="yes" prefix="default">/run/host/etc/fonts/conf.d</include>
+</fontconfig>'
 
 install_general_logic() {
     echo "=== Installing general font fixes ==="
-    write_general_font_fixes
+    write_conf "$GENERAL_FILE_NAME" "$GENERAL_FALLBACK"
     fc-cache -f >/dev/null
     echo "  system-ui Thai: $(fc-match 'system-ui:charset=0E01' 2>/dev/null | sed 's/^[^:]*: //' || true)"
 }
@@ -105,32 +116,6 @@ uninstall_general_logic() {
         echo "General font fixes are not installed."
     fi
     fc-cache -f >/dev/null
-}
-
-write_sync_conf() {
-    local target="$HOME/.config/fontconfig/conf.d/$SYNC_FILE_NAME"
-    local repo_template="$REPO_ROOT/configs/.config/fontconfig/conf.d/$SYNC_FILE_NAME"
-    mkdir -p "$(dirname "$target")"
-
-    if [[ -f "$repo_template" ]]; then
-        if [[ -f "$target" ]] && cmp -s "$repo_template" "$target"; then
-            echo "  Sync conf already up to date: $target"
-        else
-            cp "$repo_template" "$target"
-            echo "  Wrote sync conf from repo template: $target"
-        fi
-    else
-        cat > "$target" <<'EOFSYNC'
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<fontconfig>
-  <dir>/run/host/usr/share/fonts</dir>
-  <dir prefix="xdg">fonts</dir>
-  <include ignore_missing="yes" prefix="default">/run/host/etc/fonts/conf.d</include>
-</fontconfig>
-EOFSYNC
-        echo "  Wrote sync conf: $target"
-    fi
 }
 
 apply_sync_grants() {
@@ -195,10 +180,10 @@ install_sync_logic() {
     echo ""
 
     echo "Step 1/5 — Installing general host font fixes..."
-    write_general_font_fixes
+    write_conf "$GENERAL_FILE_NAME" "$GENERAL_FALLBACK"
 
     echo "Step 2/5 — Writing Flatpak sync fontconfig snippet..."
-    write_sync_conf
+    write_conf "$SYNC_FILE_NAME" "$SYNC_FALLBACK"
 
     echo "Step 3/5 — Applying global Flatpak filesystem grants..."
     apply_sync_grants
@@ -279,15 +264,11 @@ show_state() {
         echo "Sandbox probe via $probe_app:"
         for lang in th ja ko; do
             local out
-            out=$(flatpak run --command=fc-match "$probe_app" :lang=th 2>/dev/null \
+            out=$(flatpak run --command=fc-match "$probe_app" :lang=$lang 2>/dev/null \
                 | sed 's/^[^:]*: //' || echo "(probe failed)")
             printf "  %-6s -> %s\n" "$lang" "${out:-(probe failed)}"
         done
     fi
-}
-
-list_configs() {
-    show_state
 }
 
 show_main_menu() {
@@ -338,21 +319,13 @@ show_main_menu() {
 
 REPO_ROOT=$(get_repo_root)
 
-if [[ $# -eq 0 ]]; then
-    show_main_menu
-elif [[ "$1" == "-h" || "$1" == "--help" ]]; then
-    show_usage
-elif [[ "$1" == "fix" ]]; then
-    install_general_logic
-elif [[ "$1" == "sync" ]]; then
-    install_sync_logic
-elif [[ "$1" == "unfix" ]]; then
-    uninstall_general_logic
-elif [[ "$1" == "unsync" ]]; then
-    unsync_logic
-elif [[ "$1" == "state" || "$1" == "list" ]]; then
-    show_state
-else
-    show_usage
-    exit 1
-fi
+case "${1:-}" in
+    fix)        install_general_logic ;;
+    sync)       install_sync_logic ;;
+    unfix)      uninstall_general_logic ;;
+    unsync)     unsync_logic ;;
+    state|list) show_state ;;
+    -h|--help)  show_usage ;;
+    "")         show_main_menu ;;
+    *)          show_usage; exit 1 ;;
+esac
