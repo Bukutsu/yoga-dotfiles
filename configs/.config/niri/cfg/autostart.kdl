@@ -1,3 +1,6 @@
+// ────────────── wluma: auto brightness from ambient light sensor ──────────────
+spawn-at-startup "wluma"
+
 // ────────────── iio-niri: auto screen rotation ──────────────
 // Lenovo Yoga built-in display; follows the upstream iio-niri configuration.
 // SensorProxy can be ready before the accelerometer appears; retry startup for 30 seconds.
