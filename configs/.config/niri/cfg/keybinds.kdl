@@ -111,7 +111,6 @@ binds {
     Mod+O repeat=false { spawn "iio-niri" "msg" "toggle-lock-rotation"; }
 
     // System and applications (shell-independent fallbacks)
-    Mod+Shift+Escape repeat=false { spawn "noctalia" "msg" "session" "logout"; }
     Mod+Space { switch-layout "next"; }
     // Mod+A and Mod+Slash are reserved for shell launcher overrides.
     Mod+W repeat=false { toggle-overview; }
@@ -122,8 +121,6 @@ binds {
     Mod+B repeat=false { spawn-sh "exec $BROWSER"; }
 
     // Media, power, and hardware (shell-independent fallbacks)
-    Print { spawn "noctalia" "msg" "screenshot-fullscreen"; }
-    Mod+Shift+S { spawn "noctalia" "msg" "screenshot-region"; }
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"; }
     XF86AudioMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
@@ -133,6 +130,5 @@ binds {
     XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
-    XF86PowerOff repeat=false { spawn "noctalia" "msg" "session" "shutdown"; }
     XF86LaunchA { toggle-overview; }
 }

@@ -36,6 +36,11 @@ binds {
     Mod+C repeat=false { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
     Mod+P repeat=false { spawn "noctalia" "msg" "power-cycle"; }
     Mod+Escape repeat=false { spawn "noctalia" "msg" "panel-toggle" "session"; }
+    Mod+Shift+Escape repeat=false { spawn "noctalia" "msg" "session" "logout"; }
+    XF86PowerOff repeat=false { spawn "noctalia" "msg" "session" "shutdown"; }
+
+    Print { spawn "noctalia" "msg" "screenshot-fullscreen"; }
+    Mod+Shift+S { spawn "noctalia" "msg" "screenshot-region"; }
 
     // Media and hardware controls use Noctalia for OSD feedback.
     XF86AudioRaiseVolume allow-when-locked=true { spawn "noctalia" "msg" "volume-up"; }
