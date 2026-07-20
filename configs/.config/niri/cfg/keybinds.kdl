@@ -120,7 +120,7 @@ binds {
     Mod+T repeat=false { spawn-sh "$TERMINAL"; }
     Mod+Return repeat=false { spawn-sh "$TERMINAL"; }
     F24 repeat=false { spawn-sh "$TERMINAL"; } // Copilot key mapped via keyd
-    Mod+B repeat=false { spawn-sh "$BROWSER"; }
+    Mod+B repeat=false { spawn-sh "exec $BROWSER"; }
 
     // Media, power, and hardware (shell-independent fallbacks)
     Print { spawn "noctalia" "msg" "screenshot-fullscreen"; }

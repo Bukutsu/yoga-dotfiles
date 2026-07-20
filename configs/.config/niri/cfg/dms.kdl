@@ -1,7 +1,20 @@
 // ────────────── DMS integration ──────────────
 // Enable only this file or noctalia.kdl in config.kdl, then restart Niri.
 
-//spawn-at-startup "dms" "run" "--session"
+include optional=true "../dms/colors.kdl"
+include optional=true "../dms/layout.kdl"
+include optional=true "../dms/wpblur.kdl"
+include optional=true "../dms/alttab.kdl"
+include optional=true "../dms/windowrules.kdl"
+include optional=true "../dms/cursor.kdl"
+
+// Optional: uncomment these to let DMS manage display outputs and/or keybinds.
+// (If you enable binds.kdl, you should comment out the include for keybinds.kdl in config.kdl
+//  and display.kdl if you enable outputs.kdl)
+// include optional=true "../dms/outputs.kdl"
+// include optional=true "../dms/binds.kdl"
+
+spawn-at-startup "dms" "run" "--session"
 
 binds {
     // System
@@ -29,4 +42,10 @@ binds {
 
     Mod+C repeat=false { spawn-sh "dms ipc call clipboard toggle"; }
     Mod+P repeat=false { spawn-sh "dms ipc call powermenu toggle"; }
+}
+
+debug {
+    // Force a clean graphics modeset on resume to prevent the compositor
+    // from freezing when DMS does dynamic surface recovery.
+    force-disable-connectors-on-resume
 }

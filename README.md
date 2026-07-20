@@ -86,16 +86,17 @@ Select the installed ICC profile in your desktop's color settings; see [COLOR_MA
 
 Open EasyEffects and load one preset. See [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) for the differences.
 
-### Fontconfig and Flatpak fonts
+### Fontconfig fixes and Flatpak fonts
 
-Use the included script; it installs the files under `configs/.config/fontconfig` and configures Flatpak access:
+Use the included script for host-wide font fixes and optional Flatpak access:
 
 ```bash
-./scripts/setup-flatpak-fonts.sh sync
-./scripts/setup-flatpak-fonts.sh state   # verify
+./scripts/setup-flatpak-fonts.sh fix    # host fixes only
+./scripts/setup-flatpak-fonts.sh sync   # host fixes + Flatpak access
+./scripts/setup-flatpak-fonts.sh state  # verify
 ```
 
-Run `./scripts/setup-flatpak-fonts.sh unsync` to remove it.
+Run `./scripts/setup-flatpak-fonts.sh unfix` to remove host fixes or `unsync` to remove only Flatpak access.
 
 ## Docs
 

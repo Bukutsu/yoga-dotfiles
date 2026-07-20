@@ -1,14 +1,14 @@
 #!/bin/bash
-# setup-flatpak-fonts.sh: Make Flatpak apps inherit the host's fontconfig
-# (so distro-curated language defaults — e.g. Thai -> Noto Sans Thai —
-# render the same inside the sandbox as on the host).
+# setup-flatpak-fonts.sh: Apply host font fixes and share them with Flatpak apps.
 #
 # Primary mode:
 #   ./scripts/setup-flatpak-fonts.sh                 # interactive menu
-#   ./scripts/setup-flatpak-fonts.sh sync            # install host-fontconfig sync
-#   ./scripts/setup-flatpak-fonts.sh unsync          # revert sync + revoke grants
+#   ./scripts/setup-flatpak-fonts.sh fix             # install general host fixes
+#   ./scripts/setup-flatpak-fonts.sh sync            # host fixes + Flatpak sync
+#   ./scripts/setup-flatpak-fonts.sh unfix           # remove general host fixes
+#   ./scripts/setup-flatpak-fonts.sh unsync          # revert Flatpak sync + grants
 #   ./scripts/setup-flatpak-fonts.sh state           # show current state (dry-run)
-#   ./scripts/setup-flatpak-fonts.sh list            # list sync status + legacy configs
+#   ./scripts/setup-flatpak-fonts.sh list            # list font config status
 #
 # Legacy mode (force a specific font for one language):
 #   ./scripts/setup-flatpak-fonts.sh <lang> <font> [all]
@@ -31,15 +31,18 @@ show_usage() {
     cat <<EOF
 Usage:
   $0                              Interactive menu
-  $0 sync                         Install host-fontconfig sync (recommended)
+  $0 fix                          Install general host font fixes
+  $0 sync                         Install host fixes + Flatpak sync (recommended)
+  $0 unfix                        Remove general host font fixes
   $0 unsync                       Revert sync and revoke filesystem grants
   $0 state                        Print current state (overrides, fc-match diff)
-  $0 list                         List sync status and legacy configs
+  $0 list                         List font config status and legacy configs
   $0 uninstall [<lang>]           Remove a legacy per-language config
   $0 <lang> <font> [all]          Legacy: force a specific font for <lang>
   $0 -h | --help                  This help
 
 Examples:
+  $0 fix
   $0 sync
   $0 state
   $0 th "Noto Sans Thai" all      # legacy mode, only if sync isn't enough
@@ -452,9 +455,14 @@ list_configs() {
     local conf_dir="$HOME/.config/fontconfig/conf.d"
     local sync_file="$conf_dir/99-flatpak-host-sync.conf"
 
-    echo "=== Flatpak Font Configuration ==="
+    echo "=== Font Configuration ==="
     echo ""
 
+    if general_fixes_installed; then
+        echo "General font fixes: INSTALLED"
+    else
+        echo "General font fixes: not installed"
+    fi
     if [[ -f "$sync_file" ]]; then
         echo "Sync status: INSTALLED  ($sync_file)"
     else
@@ -496,9 +504,64 @@ list_configs() {
     echo "To uninstall a legacy config: $0 uninstall <lang>"
 }
 
-# --- Host-fontconfig sync ---
+# --- General host font fixes and Flatpak sync ---
 
+GENERAL_FILE_NAME="99-system-ui.conf"
 SYNC_FILE_NAME="99-flatpak-host-sync.conf"
+
+general_fixes_installed() {
+    [[ -f "$HOME/.config/fontconfig/conf.d/$GENERAL_FILE_NAME" ]]
+}
+
+write_general_font_fixes() {
+    local target="$HOME/.config/fontconfig/conf.d/$GENERAL_FILE_NAME"
+    local repo_template="$REPO_ROOT/configs/.config/fontconfig/conf.d/$GENERAL_FILE_NAME"
+    mkdir -p "$(dirname "$target")"
+
+    if [[ -f "$repo_template" ]]; then
+        if [[ -f "$target" ]] && cmp -s "$repo_template" "$target"; then
+            echo "  General font fixes already up to date: $target"
+        else
+            cp "$repo_template" "$target"
+            echo "  Wrote general font fixes: $target"
+        fi
+    else
+        cat > "$target" <<'EOFFIX'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+  <!-- Keep Sarabun available explicitly, but out of generic system UI fallback. -->
+  <match target="pattern">
+    <test name="family" compare="eq">
+      <string>system-ui</string>
+    </test>
+    <edit name="family" mode="prepend" binding="strong">
+      <string>Noto Sans</string>
+    </edit>
+  </match>
+</fontconfig>
+EOFFIX
+        echo "  Wrote general font fixes: $target"
+    fi
+}
+
+install_general_logic() {
+    echo "=== Installing general font fixes ==="
+    write_general_font_fixes
+    fc-cache -f >/dev/null
+    echo "  system-ui Thai: $(fc-match 'system-ui:charset=0E01' 2>/dev/null | sed 's/^[^:]*: //' || true)"
+}
+
+uninstall_general_logic() {
+    local target="$HOME/.config/fontconfig/conf.d/$GENERAL_FILE_NAME"
+    if [[ -f "$target" ]]; then
+        rm -f "$target"
+        echo "Removed general font fixes: $target"
+    else
+        echo "General font fixes are not installed."
+    fi
+    fc-cache -f >/dev/null
+}
 SYNC_GRANTS=(host-os host-etc xdg-config/fontconfig ~/.local/share/fonts)
 
 wipe_app_caches() {
@@ -582,8 +645,11 @@ verify_sync() {
 }
 
 install_sync_logic() {
-    echo "=== Installing Flatpak host-fontconfig sync ==="
+    echo "=== Installing general font fixes + Flatpak sync ==="
     echo ""
+
+    echo "Step 1/6 — Installing general host font fixes..."
+    write_general_font_fixes
 
     # Warn if legacy configs exist
     local legacy
@@ -596,21 +662,21 @@ install_sync_logic() {
         echo ""
     fi
 
-    echo "Step 1/5 — Writing sync fontconfig snippet..."
+    echo "Step 2/6 — Writing Flatpak sync fontconfig snippet..."
     write_sync_conf
 
-    echo "Step 2/5 — Applying global Flatpak filesystem grants..."
+    echo "Step 3/6 — Applying global Flatpak filesystem grants..."
     apply_sync_grants
     echo "  Applied: ${SYNC_GRANTS[*]}"
 
-    echo "Step 3/5 — Refreshing host font cache..."
+    echo "Step 4/6 — Refreshing host font cache..."
     fc-cache -f >/dev/null
 
-    echo "Step 4/5 — Wiping per-app fontconfig caches..."
+    echo "Step 5/6 — Wiping per-app fontconfig caches..."
     wipe_app_caches
     echo "  Done. Caches will rebuild on next app launch."
 
-    echo "Step 5/5 — Verifying sandbox sees host fonts..."
+    echo "Step 6/6 — Verifying sandbox sees host fonts..."
     verify_sync
 
     echo ""
@@ -635,6 +701,7 @@ unsync_logic() {
     echo "  Revoking filesystem grants..."
     revoke_sync_grants
     echo "  Revoked: ${SYNC_GRANTS[*]}"
+    echo "  General host font fixes remain installed; use '$0 unfix' to remove them."
 
     echo "  Refreshing host font cache..."
     fc-cache -f >/dev/null
@@ -651,9 +718,14 @@ show_state() {
     echo ""
 
     if sync_is_installed; then
-        echo "Sync status: INSTALLED"
+        echo "Flatpak sync: INSTALLED"
     else
-        echo "Sync status: not installed"
+        echo "Flatpak sync: not installed"
+    fi
+    if general_fixes_installed; then
+        echo "General font fixes: INSTALLED"
+    else
+        echo "General font fixes: not installed"
     fi
     echo ""
 
@@ -697,23 +769,30 @@ show_state() {
 show_main_menu() {
     while true; do
         echo ""
-        echo "=== Flatpak Font Sync ==="
-        local host_th status apps
+        echo "=== Font Setup ==="
+        local host_th status general_status apps
         host_th=$(fc-match :lang=th 2>/dev/null | sed 's/^[^:]*: //')
         if sync_is_installed; then
             status="INSTALLED"
         else
             status="not installed"
         fi
+        if general_fixes_installed; then
+            general_status="INSTALLED"
+        else
+            general_status="not installed"
+        fi
         apps=$(flatpak list --app --columns=application 2>/dev/null | grep -v '^Application$' | wc -l)
         echo "Host Thai (lang=th) resolves to: ${host_th:-?}"
-        echo "Sync status: $status  ($apps Flatpak app(s) detected)"
+        echo "General font fixes: $general_status"
+        echo "Flatpak sync: $status  ($apps app(s) detected)"
         echo ""
-        echo "  [1] Install host-fontconfig sync (recommended)"
+        echo "  [1] Install general font fixes + Flatpak sync (recommended)"
         echo "  [2] Re-sync (after installing new apps or fonts)"
         echo "  [3] Show current state (dry-run)"
-        echo "  [4] Uninstall (revert sync + revoke grants)"
-        echo "  [5] Legacy: force a specific font for one language"
+        echo "  [4] Uninstall Flatpak sync (keeps general fixes)"
+        echo "  [5] Remove general font fixes"
+        echo "  [6] Legacy: force a specific font for one language"
         echo "  [q] Quit"
         echo ""
         read -rp "Choice: " _choice
@@ -722,7 +801,8 @@ show_main_menu() {
             1|2) install_sync_logic ;;
             3)   show_state ;;
             4)   unsync_logic ;;
-            5)
+            5)   uninstall_general_logic ;;
+            6)
                 run_interactive_install
                 install_logic "$LANG_CODE" "$FONT_FAMILY" "${APPLY_ALL:-}" "$REPO_ROOT"
                 # legacy_install may exit on user abort; only reach here on success
@@ -742,8 +822,12 @@ if [[ $# -eq 0 ]]; then
     show_main_menu
 elif [[ "$1" == "-h" || "$1" == "--help" ]]; then
     show_usage
+elif [[ "$1" == "fix" ]]; then
+    install_general_logic
 elif [[ "$1" == "sync" ]]; then
     install_sync_logic
+elif [[ "$1" == "unfix" ]]; then
+    uninstall_general_logic
 elif [[ "$1" == "unsync" ]]; then
     unsync_logic
 elif [[ "$1" == "state" ]]; then
