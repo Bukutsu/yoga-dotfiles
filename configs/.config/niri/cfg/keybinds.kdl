@@ -134,7 +134,6 @@ binds {
     XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
-    Mod+P repeat=false { spawn "noctalia" "msg" "power-cycle"; }
     XF86PowerOff repeat=false { spawn "systemctl" "poweroff"; }
     XF86LaunchA { toggle-overview; }
 }
