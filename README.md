@@ -91,12 +91,12 @@ Open EasyEffects and load one preset. See [AUDIO_TUNING.md](docs/AUDIO_TUNING.md
 Use the included script for host-wide font fixes and optional Flatpak access:
 
 ```bash
-./scripts/setup-flatpak-fonts.sh fix    # host fixes only
-./scripts/setup-flatpak-fonts.sh sync   # host fixes + Flatpak access
-./scripts/setup-flatpak-fonts.sh state  # verify
+./scripts/setup-fonts.sh fix    # host fixes only
+./scripts/setup-fonts.sh sync   # host fixes + Flatpak access
+./scripts/setup-fonts.sh state  # verify
 ```
 
-Run `./scripts/setup-flatpak-fonts.sh unfix` to remove host fixes or `unsync` to remove only Flatpak access.
+Run `./scripts/setup-fonts.sh unfix` to remove host fixes or `unsync` to remove only Flatpak access.
 
 ## Docs
 

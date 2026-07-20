@@ -1,18 +1,18 @@
 #!/bin/bash
-# setup-flatpak-fonts.sh: Apply host font fixes and share them with Flatpak apps.
+# setup-fonts.sh: Apply host font fixes and share them with Flatpak apps.
 #
 # Primary mode:
-#   ./scripts/setup-flatpak-fonts.sh                 # interactive menu
-#   ./scripts/setup-flatpak-fonts.sh fix             # install general host fixes
-#   ./scripts/setup-flatpak-fonts.sh sync            # host fixes + Flatpak sync
-#   ./scripts/setup-flatpak-fonts.sh unfix           # remove general host fixes
-#   ./scripts/setup-flatpak-fonts.sh unsync          # revert Flatpak sync + grants
-#   ./scripts/setup-flatpak-fonts.sh state           # show current state (dry-run)
-#   ./scripts/setup-flatpak-fonts.sh list            # list font config status
+#   ./scripts/setup-fonts.sh                 # interactive menu
+#   ./scripts/setup-fonts.sh fix             # install general host fixes
+#   ./scripts/setup-fonts.sh sync            # host fixes + Flatpak sync
+#   ./scripts/setup-fonts.sh unfix           # remove general host fixes
+#   ./scripts/setup-fonts.sh unsync          # revert Flatpak sync + grants
+#   ./scripts/setup-fonts.sh state           # show current state (dry-run)
+#   ./scripts/setup-fonts.sh list            # list font config status
 #
 # Legacy mode (force a specific font for one language):
-#   ./scripts/setup-flatpak-fonts.sh <lang> <font> [all]
-#   ./scripts/setup-flatpak-fonts.sh uninstall [<lang>]
+#   ./scripts/setup-fonts.sh <lang> <font> [all]
+#   ./scripts/setup-fonts.sh uninstall [<lang>]
 
 set -e
 
@@ -530,13 +530,39 @@ write_general_font_fixes() {
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
 <fontconfig>
-  <!-- Keep Sarabun available explicitly, but out of generic system UI fallback. -->
+  <!-- Force system-ui to use Noto Sans -->
   <match target="pattern">
     <test name="family" compare="eq">
       <string>system-ui</string>
     </test>
     <edit name="family" mode="prepend" binding="strong">
       <string>Noto Sans</string>
+    </edit>
+  </match>
+
+  <!-- Replace print/document Thai fonts (TH Sarabun, Angsana, Cordia) with Noto Sans Thai for web readability -->
+  <match target="pattern">
+    <test name="family" compare="contains">
+      <string>Sarabun</string>
+    </test>
+    <edit name="family" mode="assign" binding="same">
+      <string>Noto Sans Thai</string>
+    </edit>
+  </match>
+  <match target="pattern">
+    <test name="family" compare="contains">
+      <string>Angsana</string>
+    </test>
+    <edit name="family" mode="assign" binding="same">
+      <string>Noto Sans Thai</string>
+    </edit>
+  </match>
+  <match target="pattern">
+    <test name="family" compare="contains">
+      <string>Cordia</string>
+    </test>
+    <edit name="family" mode="assign" binding="same">
+      <string>Noto Sans Thai</string>
     </edit>
   </match>
 </fontconfig>
