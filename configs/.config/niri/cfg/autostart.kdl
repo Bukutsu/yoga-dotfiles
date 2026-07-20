@@ -2,5 +2,5 @@
 spawn-at-startup "wluma"
 
 // ────────────── iio-niri: auto screen rotation ──────────────
-// Waits for accelerometer, then starts iio-niri. See scripts/iio-niri-wait.sh.
-spawn-at-startup "sh" "-c" "$HOME/Projects/yoga-dotfiles/scripts/iio-niri-wait.sh"
+// SensorProxy can be ready before the accelerometer appears; retry for up to 30s.
+spawn-sh-at-startup "for i in $(seq 30); do busctl --system get-property net.hadess.SensorProxy /net/hadess/SensorProxy net.hadess.SensorProxy HasAccelerometer 2>/dev/null | grep -qx 'b true' && exec iio-niri listen --monitor eDP-1; sleep 1; done; echo 'iio-niri: accelerometer not found after 30s' >&2"
