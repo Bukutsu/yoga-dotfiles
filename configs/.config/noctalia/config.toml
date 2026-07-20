@@ -1,0 +1,172 @@
+[backdrop]
+enabled = true
+
+[bar]
+order = [ "default" ]
+
+    [bar.default]
+    concave_edge_corners = false
+    end = [
+        "tray",
+        "notifications",
+        "clipboard",
+        "network",
+        "bluetooth",
+        "volume",
+        "brightness",
+        "battery",
+        "control-center",
+        "session"
+    ]
+    margin_edge = 4
+    margin_ends = 8
+    start = [ "launcher", "wallpaper", "workspaces", "media" ]
+
+[brightness]
+enable_ddcutil = true
+
+[dock]
+smart_auto_hide = true
+
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = true
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 900.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    timeout = 660.0
+
+[location]
+auto_locate = true
+
+[lockscreen_widgets]
+enabled = false
+schema_version = 2
+widget_order = [ "lockscreen-login-box@HDMI-A-1", "lockscreen-login-box@eDP-1", "lockscreen-login-box@winit" ]
+
+    [lockscreen_widgets.grid]
+    cell_size = 16
+    major_interval = 4
+    visible = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 960.0
+    cy = 961.0
+    output = "HDMI-A-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@HDMI-A-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@eDP-1"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 823.0
+    cy = 910.0
+    output = "eDP-1"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@eDP-1".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+    [lockscreen_widgets.widget."lockscreen-login-box@winit"]
+    box_height = 70.0
+    box_width = 400.0
+    cx = 640.0
+    cy = 681.0
+    output = "winit"
+    rotation = 0.0
+    type = "login_box"
+
+        [lockscreen_widgets.widget."lockscreen-login-box@winit".settings]
+        background_color = "surface_variant"
+        background_opacity = 0.88
+        background_radius = 12.0
+        input_opacity = 1.0
+        input_radius = 6.0
+        show_caps_lock = true
+        show_keyboard_layout = true
+        show_login_button = true
+        show_password_hint = true
+
+[nightlight]
+enabled = true
+
+[osd.kinds]
+media = false
+
+[plugins]
+enabled = [ "noctalia/wallhaven" ]
+
+[shell]
+avatar_path = "/home/bukutsu/Pictures/Screenshot_20260715_025948.png"
+launch_apps_as_systemd_services = true
+niri_overview_type_to_launch_enabled = true
+password_style = "random"
+polkit_agent = true
+screen_time_enabled = true
+
+    [shell.launcher]
+    session_search = true
+
+    [shell.screenshot]
+    pipe_command = "satty -f -"
+    pipe_to_command = true
+    save_to_file = true
+
+[theme]
+builtin = "Tokyo-Night"
+
+    [theme.templates]
+    builtin_ids = [ "gtk3", "gtk4", "niri" ]
+    community_ids = [ "zen-browser" ]
+
+[wallpaper]
+directory = "/home/bukutsu/Pictures"
+transition_on_startup = true
+
+    [wallpaper.default]
+    path = "/home/bukutsu/Pictures/wallhaven-lyz3d2.png"
+
+    [wallpaper.last]
+    path = "/home/bukutsu/Pictures/wallhaven-lyz3d2.png"
+
+    [wallpaper.monitors.eDP-1]
+    path = "/home/bukutsu/Pictures/wallhaven-lyz3d2.png"
+
+[widget.wallpaper]
+enabled = false
+
+[widget.workspaces]
+capsule = true
+style = "minimal"
