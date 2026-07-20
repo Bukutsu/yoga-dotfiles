@@ -111,7 +111,6 @@ binds {
     Mod+O repeat=false { spawn "iio-niri" "msg" "toggle-lock-rotation"; }
 
     // System and applications (shell-independent fallbacks)
-    Mod+Escape repeat=false { spawn "loginctl" "lock-session"; }
     Mod+Shift+Escape repeat=false { spawn-sh "loginctl terminate-session \"$XDG_SESSION_ID\""; }
     Mod+Space { switch-layout "next"; }
     // Mod+A and Mod+Slash are reserved for shell launcher overrides.
