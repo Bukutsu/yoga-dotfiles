@@ -72,7 +72,7 @@ bind("O", hl.dsp.exec_cmd("if ps -C iio-hyprland -o stat= | grep -q '^T'; then p
 -- Windows and scrolling layout operations.
 bind("Q", hl.dsp.window.close())
 bind("ALT + ESCAPE", hl.dsp.window.close())
-bind("M", hl.dsp.layout("fit expand"))
+bind("M", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle", layout_aware = true }))
 bind("F11", hl.dsp.window.fullscreen({ action = "toggle", layout_aware = true }))
 bind("G", hl.dsp.window.float({ action = "toggle" }))
 bind("Y", hl.dsp.window.float({ action = "toggle" }))

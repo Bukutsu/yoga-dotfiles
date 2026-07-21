@@ -17,6 +17,10 @@ hl.config({
         blur = { enabled = false },
     },
     animations = { enabled = true },
+    render = {
+        cm_enabled = true,
+        cm_auto_hdr = 2,
+    },
     misc = {
         force_default_wallpaper = 0,
         disable_hyprland_logo = true,
@@ -30,7 +34,7 @@ hl.config({
         kb_layout = "us,th",
         numlock_by_default = true,
         follow_mouse = 1,
-        sensitivity = -0.75,
+        sensitivity = 1,
         accel_profile = "flat",
         touchpad = {
             natural_scroll = true,

@@ -3,7 +3,9 @@ hl.monitor({
     output = "eDP-1",
     mode = "2880x1800@120.000",
     position = "0x0",
-    scale = 1.75,
+    scale = 1.50,
+    bitdepth = 10,
+    cm = "srgb",
     vrr = 2,
 })
 hl.monitor({
