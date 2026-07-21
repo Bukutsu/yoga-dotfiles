@@ -1,8 +1,7 @@
 #!/bin/bash
 # setup-fonts.sh: Apply host font fixes and share them with Flatpak apps.
 #
-# Primary mode:
-#   ./scripts/setup-fonts.sh                 # interactive menu
+# Usage:
 #   ./scripts/setup-fonts.sh fix             # install general host fixes
 #   ./scripts/setup-fonts.sh sync            # host fixes + Flatpak sync
 #   ./scripts/setup-fonts.sh unfix           # remove general host fixes
@@ -19,7 +18,6 @@ SYNC_GRANTS=(host-os host-etc xdg-config/fontconfig ~/.local/share/fonts)
 show_usage() {
     cat <<EOF
 Usage:
-  $0                              Interactive menu
   $0 fix                          Install general host font fixes
   $0 sync                         Install host fixes + Flatpak sync (recommended)
   $0 unfix                        Remove general host font fixes
@@ -48,61 +46,23 @@ sync_is_installed() {
     [[ -f "$HOME/.config/fontconfig/conf.d/$SYNC_FILE_NAME" ]]
 }
 
-# Write a fontconfig conf file from repo template or inline fallback.
-# Usage: write_conf <filename> [fallback-content]
 write_conf() {
-    local filename="$1" fallback="$2"
+    local filename="$1"
     local target="$HOME/.config/fontconfig/conf.d/$filename"
     local repo_template="$REPO_ROOT/configs/.config/fontconfig/conf.d/$filename"
     mkdir -p "$(dirname "$target")"
 
-    if [[ -f "$repo_template" ]]; then
-        if cmp -s "$repo_template" "$target" 2>/dev/null; then
-            echo "  Already up to date: $target"
-        else
-            cp "$repo_template" "$target"
-            echo "  Wrote: $target"
-        fi
+    if cmp -s "$repo_template" "$target" 2>/dev/null; then
+        echo "  Already up to date: $target"
     else
-        printf '%s\n' "$fallback" > "$target"
+        cp "$repo_template" "$target"
         echo "  Wrote: $target"
     fi
 }
 
-GENERAL_FALLBACK='<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<fontconfig>
-  <!-- Force system-ui to use Noto Sans -->
-  <match target="pattern">
-    <test name="family" compare="eq">
-      <string>system-ui</string>
-    </test>
-    <edit name="family" mode="prepend" binding="strong">
-      <string>Noto Sans</string>
-    </edit>
-  </match>
-
-  <!-- Reject print/document fonts (Sarabun) from UI fallback -->
-  <selectfont>
-    <rejectfont>
-      <pattern><patelt name="family"><string>TH Sarabun New</string></patelt></pattern>
-      <pattern><patelt name="family"><string>TH SarabunPSK</string></patelt></pattern>
-      <pattern><patelt name="family"><string>Sarabun</string></patelt></pattern>
-    </rejectfont>
-  </selectfont>
-</fontconfig>'
-
-SYNC_FALLBACK='<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
-<fontconfig>
-  <dir>/run/host/usr/share/fonts</dir>
-  <dir prefix="xdg">fonts</dir>
-  <include ignore_missing="yes" prefix="default">/run/host/etc/fonts/conf.d</include>
-</fontconfig>'
-
 install_general_logic() {
     echo "=== Installing general font fixes ==="
-    write_conf "$GENERAL_FILE_NAME" "$GENERAL_FALLBACK"
+    write_conf "$GENERAL_FILE_NAME"
     fc-cache -f >/dev/null
     echo "  system-ui Thai: $(fc-match 'system-ui:charset=0E01' 2>/dev/null | sed 's/^[^:]*: //' || true)"
 }
@@ -180,10 +140,10 @@ install_sync_logic() {
     echo ""
 
     echo "Step 1/5 — Installing general host font fixes..."
-    write_conf "$GENERAL_FILE_NAME" "$GENERAL_FALLBACK"
+    write_conf "$GENERAL_FILE_NAME"
 
     echo "Step 2/5 — Writing Flatpak sync fontconfig snippet..."
-    write_conf "$SYNC_FILE_NAME" "$SYNC_FALLBACK"
+    write_conf "$SYNC_FILE_NAME"
 
     echo "Step 3/5 — Applying global Flatpak filesystem grants..."
     apply_sync_grants
@@ -271,50 +231,6 @@ show_state() {
     fi
 }
 
-show_main_menu() {
-    while true; do
-        echo ""
-        echo "=== Font Setup ==="
-        local host_th status general_status apps=0
-        host_th=$(fc-match :lang=th 2>/dev/null | sed 's/^[^:]*: //')
-        if sync_is_installed; then
-            status="INSTALLED"
-        else
-            status="not installed"
-        fi
-        if general_fixes_installed; then
-            general_status="INSTALLED"
-        else
-            general_status="not installed"
-        fi
-        if command -v flatpak &>/dev/null; then
-            apps=$(flatpak list --app --columns=application 2>/dev/null | grep -v '^Application$' | wc -l)
-        fi
-        echo "Host Thai (lang=th) resolves to: ${host_th:-?}"
-        echo "General font fixes: $general_status"
-        echo "Flatpak sync: $status  ($apps Flatpak app(s) detected)"
-        echo ""
-        echo "  [1] Install general font fixes + Flatpak sync (recommended)"
-        echo "  [2] Install general host font fixes only"
-        echo "  [3] Show current state"
-        echo "  [4] Uninstall Flatpak sync (keeps general fixes)"
-        echo "  [5] Remove general font fixes"
-        echo "  [q] Quit"
-        echo ""
-        read -rp "Choice: " _choice
-        echo ""
-        case "$_choice" in
-            1) install_sync_logic ;;
-            2) install_general_logic ;;
-            3) show_state ;;
-            4) unsync_logic ;;
-            5) uninstall_general_logic ;;
-            q|Q|"") echo "Bye."; return 0 ;;
-            *) echo "Invalid choice." ;;
-        esac
-    done
-}
-
 # --- Main ---
 
 REPO_ROOT=$(get_repo_root)
@@ -326,6 +242,5 @@ case "${1:-}" in
     unsync)     unsync_logic ;;
     state|list) show_state ;;
     -h|--help)  show_usage ;;
-    "")         show_main_menu ;;
     *)          show_usage; exit 1 ;;
 esac
