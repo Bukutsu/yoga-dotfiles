@@ -16,3 +16,17 @@ spawn-sh-at-startup r#"
     done
     echo 'iio-niri: accelerometer not found after 30s' >&2
 "#
+
+// Re-enable the internal display when the last external display is unplugged.
+// niri keeps manually disabled outputs disabled across hotplug changes.
+spawn-sh-at-startup r#"
+    while sleep 2; do
+        outputs=$(niri msg -j outputs 2>/dev/null) || continue
+        jq -e '
+            has("eDP-1") and
+            .["eDP-1"].logical == null and
+            length == 1
+        ' >/dev/null <<<"$outputs" \
+          && niri msg output eDP-1 on
+    done
+"#
