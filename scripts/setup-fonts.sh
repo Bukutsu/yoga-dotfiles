@@ -7,7 +7,6 @@
 #   ./scripts/setup-fonts.sh unfix           # remove general host fixes
 #   ./scripts/setup-fonts.sh unsync          # revert Flatpak sync + grants
 #   ./scripts/setup-fonts.sh state           # show current state (dry-run)
-#   ./scripts/setup-fonts.sh list            # list font config status
 
 set -e
 
@@ -23,7 +22,6 @@ Usage:
   $0 unfix                        Remove general host font fixes
   $0 unsync                       Revert sync and revoke filesystem grants
   $0 state                        Print current state (overrides, fc-match diff)
-  $0 list                         List font config status
   $0 -h | --help                  This help
 
 Examples:
@@ -240,7 +238,7 @@ case "${1:-}" in
     sync)       install_sync_logic ;;
     unfix)      uninstall_general_logic ;;
     unsync)     unsync_logic ;;
-    state|list) show_state ;;
+    state)      show_state ;;
     -h|--help)  show_usage ;;
     *)          show_usage; exit 1 ;;
 esac
