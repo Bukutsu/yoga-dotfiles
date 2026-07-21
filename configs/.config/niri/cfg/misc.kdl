@@ -5,7 +5,7 @@
         // Default Applications
         TERMINAL "kitty"
         BROWSER "zen-browser"
-        FILE_MANAGER "thunar"
+        FILE_MANAGER "dolphin"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
         QT_QPA_PLATFORM "wayland"

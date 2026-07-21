@@ -64,10 +64,10 @@ for _, item in ipairs({
     bind("ALT + " .. item.key, hl.dsp.focus({ monitor = item.direction }))
     bind("ALT + SHIFT + " .. item.key, hl.dsp.workspace.move({ monitor = item.direction }))
 end
-bind("ALT + I", hl.dsp.dpms({ action = "toggle", monitor = "eDP-1" }))
+bind("ALT + I", hl.dsp.exec_cmd([[hyprctl dispatch 'hl.dsp.dpms({ action = "toggle", monitor = "eDP-1" })'; sleep 0.5; hyprctl monitors -j | jq -e '.[] | select(.name == "eDP-1" and .dpmsStatus)' >/dev/null && pkill -HUP -x monitor-sensor]]))
 
--- iio-hyprland has no rotation-lock IPC; pause/resume the daemon instead.
-bind("O", hl.dsp.exec_cmd("if ps -C iio-hyprland -o stat= | grep -q '^T'; then pkill -CONT -x iio-hyprland; else pkill -STOP -x iio-hyprland; fi"))
+-- Pause/resume SensorProxy event delivery to lock/unlock rotation.
+bind("O", hl.dsp.exec_cmd("if ps -C monitor-sensor -o stat= | grep -q '^T'; then pkill -CONT -x monitor-sensor; else pkill -STOP -x monitor-sensor; fi"))
 
 -- Windows and scrolling layout operations.
 bind("Q", hl.dsp.window.close())
