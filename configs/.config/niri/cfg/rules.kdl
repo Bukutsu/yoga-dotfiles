@@ -16,11 +16,6 @@ window-rule {
 }
 
 window-rule {
-    match app-id=r#"(?i)satty"#
-    open-floating true
-}
-
-window-rule {
     match app-id="mpv"
     match app-id=r#"^steam_app_"#
     variable-refresh-rate true

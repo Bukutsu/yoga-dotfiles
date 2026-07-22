@@ -141,7 +141,7 @@ Ensure these are installed for all keybinds and hardware configs to work:
 - **Audio Tuning:** `easyeffects`
 
 ### Utilities & Media
-- **Screenshot:** `noctalia` (wlr-screencopy) + `satty` (annotation)
+- **Screenshot:** `noctalia` (wlr-screencopy) + `tensaku` (annotation)
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
 - **Config scripting:** `jq`
 

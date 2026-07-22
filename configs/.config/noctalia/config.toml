@@ -140,7 +140,7 @@ screen_time_enabled = true
     session_search = true
 
     [shell.screenshot]
-    pipe_command = "satty -f -"
+    pipe_command = "tensaku -f -"
     pipe_to_command = true
     save_to_file = true
 
