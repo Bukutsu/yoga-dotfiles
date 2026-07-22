@@ -38,18 +38,10 @@ binds {
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
     // niri has no move-to-previous-workspace action.
-    Mod+Ctrl+Left  { focus-workspace-up; }
-    Mod+Ctrl+Down  { focus-workspace-down; }
-    Mod+Ctrl+Up    { focus-workspace-up; }
-    Mod+Ctrl+Right { focus-workspace-down; }
     Mod+Ctrl+H { focus-workspace-up; }
     Mod+Ctrl+J { focus-workspace-down; }
     Mod+Ctrl+K { focus-workspace-up; }
     Mod+Ctrl+L { focus-workspace-down; }
-    Mod+Ctrl+Shift+Left  { move-column-to-workspace-up; }
-    Mod+Ctrl+Shift+Down  { move-column-to-workspace-down; }
-    Mod+Ctrl+Shift+Up    { move-column-to-workspace-up; }
-    Mod+Ctrl+Shift+Right { move-column-to-workspace-down; }
     Mod+Ctrl+Shift+H { move-column-to-workspace-up; }
     Mod+Ctrl+Shift+J { move-column-to-workspace-down; }
     Mod+Ctrl+Shift+K { move-column-to-workspace-up; }
@@ -67,18 +59,10 @@ binds {
             [ -z "$action" ] || niri msg output eDP-1 "$action"
         "#
     }
-    Mod+Alt+Left  { focus-monitor-left; }
-    Mod+Alt+Down  { focus-monitor-down; }
-    Mod+Alt+Up    { focus-monitor-up; }
-    Mod+Alt+Right { focus-monitor-right; }
     Mod+Alt+H { focus-monitor-left; }
     Mod+Alt+J { focus-monitor-down; }
     Mod+Alt+K { focus-monitor-up; }
     Mod+Alt+L { focus-monitor-right; }
-    Mod+Shift+Alt+Left  { move-column-to-monitor-left; }
-    Mod+Shift+Alt+Down  { move-column-to-monitor-down; }
-    Mod+Shift+Alt+Up    { move-column-to-monitor-up; }
-    Mod+Shift+Alt+Right { move-column-to-monitor-right; }
     Mod+Shift+Alt+H { move-column-to-monitor-left; }
     Mod+Shift+Alt+J { move-column-to-monitor-down; }
     Mod+Shift+Alt+K { move-column-to-monitor-up; }
@@ -94,17 +78,11 @@ binds {
     // niri has no force-kill action; this is the safe closest equivalent.
     Mod+Alt+Escape repeat=false { close-window; }
     Alt+Tab { focus-window-previous; }
-    Mod+Tab { focus-window-previous; }
-    Alt+Shift+Tab { focus-window-previous; }
-    Mod+Shift+Tab { focus-window-previous; }
     Mod+Equal { set-column-width "+10%"; }
-    Mod+Period { set-column-width "+10%"; }
     Mod+Minus { set-column-width "-10%"; }
-    Mod+Comma { set-column-width "-10%"; }
 
     // COSMIC tiling actions with niri equivalents
     Mod+G { toggle-window-floating; }
-    Mod+Y { toggle-window-floating; }
     Mod+S { toggle-column-tabbed-display; }
     Mod+X { swap-window-right; }
     // Niri has no orientation action; lock/unlock automatic tablet rotation.
@@ -114,9 +92,7 @@ binds {
     Mod+Space { switch-layout "next"; }
     // Mod+A and Mod+Slash are reserved for shell launcher overrides.
     Mod+W repeat=false { toggle-overview; }
-    Mod+Shift+Z repeat=false {
-        spawn-sh "if pgrep -x shmooz >/dev/null; then pkill -x shmooz; else exec shmooz --no-indicator; fi"
-    }
+
     Mod+F repeat=false { spawn-sh "$FILE_MANAGER"; }
     Mod+T repeat=false { spawn-sh "$TERMINAL"; }
     Mod+Return repeat=false { spawn-sh "$TERMINAL"; }
@@ -133,5 +109,5 @@ binds {
     XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "10%-"; }
-    XF86LaunchA { toggle-overview; }
+
 }

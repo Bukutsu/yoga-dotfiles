@@ -18,19 +18,14 @@ Existing files at the destinations are overwritten, so back them up first.
 Copy all configuration directories to your system:
 
 ```bash
-# Copy all desktop configuration files
 cp -r configs/.config/. ~/.config/
-
-# Copy all user-level local files (including custom KDE global layouts)
-cp -r configs/.local/. ~/.local/
 ```
 
 Alternatively, copy individual configurations:
 
 ```bash
-# Niri & DankMaterialShell
+# Niri
 cp -r configs/.config/niri ~/.config/
-cp -r configs/.config/DankMaterialShell ~/.config/
 
 # Niri ambient-light auto-brightness (wluma)
 cp -r configs/.config/wluma ~/.config/
@@ -55,10 +50,6 @@ cp -r configs/.config/easyeffects ~/.config/
 ```
 
 Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `wluma` and `iio-niri` from `config.kdl`. `wluma` learns your preferred brightness after several manual adjustments in different lighting conditions.
-
-### KDE Plasma
-
-Log out of Plasma first so it does not overwrite the copied settings, then copy the user configurations (`.config` and `.local`) from a TTY or another desktop session. Log back in to apply.
 
 ### System configs
 
@@ -130,7 +121,6 @@ Run `./scripts/setup-fonts.sh unfix` to remove host fixes or `unsync` to remove 
 - `Print` — fullscreen screenshot
 - `Mod+Shift+S` — region screenshot
 - `Mod+Alt+I` — toggle the built-in `eDP-1` display (requires `jq`)
-- `Mod+Shift+Z` — toggle presentation zoom (requires `shmooz`)
 
 Noctalia-specific bindings live in `configs/.config/niri/cfg/noctalia-integration.kdl`.
 
@@ -140,11 +130,11 @@ Ensure these are installed for all keybinds and hardware configs to work:
 
 ### Core & Shell
 - **Compositors:** `niri`, `hyprland`, `plasma-desktop`
-- **Shell/UI:** `noctalia` (primary panel/launcher), `dms` (alternative)
+- **Shell/UI:** `noctalia`
 - **Terminal/Files:** `alacritty`, `kitty`, `dolphin`
 
 ### Hardware & System
-- **Auto-rotate:** `iio-sensor-proxy`, `iio-niri`, `iio-hyprland`
+- **Auto-rotate:** `iio-sensor-proxy`, `iio-niri`
 - **Auto-brightness:** `wluma`, `iio-sensor-proxy`
 - **Key Remapping (Copilot Key):** `keyd`
 - **Scheduling:** `scx-scheds` (for `scx_loader`)
@@ -153,7 +143,6 @@ Ensure these are installed for all keybinds and hardware configs to work:
 ### Utilities & Media
 - **Screenshot:** `noctalia` (wlr-screencopy) + `satty` (annotation)
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
-- **Presentation zoom:** `shmooz`
 - **Config scripting:** `jq`
 
 ## License

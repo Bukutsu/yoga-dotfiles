@@ -127,8 +127,6 @@ for version in 3.0 4.0; do
 done
 ```
 
-The KDE config in this repository also selects `Papirus-Dark` in `kdeglobals`. Restart open applications after changing the theme.
-
 ---
 
 ## Phase 9: Verification
@@ -152,10 +150,3 @@ If you leave your laptop plugged in frequently, you can preserve the battery's c
 ### Color Calibration (OLED Display Profile)
 Apply the factory-calibrated X-Rite color profile for the 14" 2.8K OLED display to ensure color accuracy:
 *   **Guide**: See [COLOR_MANAGEMENT.md](COLOR_MANAGEMENT.md) for installation and application instructions.
-
----
-
-## Exit Strategy (If CachyOS Disappears)
-1. Remove CachyOS repo from `/etc/pacman.conf`.
-2. `scx-manager` stays installed (no updates, but keeps working).
-3. Optionally install standard `linux` kernel: `sudo pacman -S linux linux-headers`.
