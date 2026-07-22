@@ -130,6 +130,7 @@ Run `./scripts/setup-fonts.sh unfix` to remove host fixes or `unsync` to remove 
 - `Print` — fullscreen screenshot
 - `Mod+Shift+S` — region screenshot
 - `Mod+Alt+I` — toggle the built-in `eDP-1` display (requires `jq`)
+- `Mod+Shift+Z` — toggle presentation zoom (requires `shmooz`)
 
 Noctalia-specific bindings live in `configs/.config/niri/cfg/noctalia-integration.kdl`.
 
@@ -152,6 +153,7 @@ Ensure these are installed for all keybinds and hardware configs to work:
 ### Utilities & Media
 - **Screenshot:** `noctalia` (wlr-screencopy) + `satty` (annotation)
 - **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
+- **Presentation zoom:** `shmooz`
 - **Config scripting:** `jq`
 
 ## License
