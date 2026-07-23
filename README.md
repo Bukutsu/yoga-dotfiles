@@ -42,6 +42,10 @@ cp -r configs/.config/alacritty ~/.config/
 # Kitty
 cp -r configs/.config/kitty ~/.config/
 
+# GTK appearance and Papirus icons
+cp -r configs/.config/gtk-3.0 ~/.config/
+cp -r configs/.config/gtk-4.0 ~/.config/
+
 # MIME default applications
 cp configs/.config/mimeapps.list ~/.config/mimeapps.list
 
@@ -51,7 +55,7 @@ cp -r configs/.config/easyeffects ~/.config/
 
 Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `wluma` and `iio-niri` from `config.kdl`. `wluma` learns your preferred brightness after several manual adjustments in different lighting conditions.
 
-Icon theme setup is covered in [INSTALL_GUIDE.md](docs/INSTALL_GUIDE.md#phase-8-set-papirus-dark-icons-niri).
+GTK icon themes are tracked in `configs/.config/gtk-3.0/settings.ini` and `configs/.config/gtk-4.0/settings.ini`. Copy both directories to apply Papirus-Dark; restart affected applications afterward.
 
 ### System configs
 

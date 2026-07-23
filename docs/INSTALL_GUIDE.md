@@ -101,20 +101,14 @@ sudo systemctl restart NetworkManager
 ## Phase 8: Set Papirus-Dark Icons (Niri)
 Niri does not provide its own icon setting. GTK/GSettings controls GTK applications, and the Niri config makes Qt use the GTK platform theme.
 
-Install and select Papirus-Dark:
+Install Papirus-Dark and copy the tracked GTK settings:
 ```bash
 sudo pacman -S papirus-icon-theme
-gsettings set org.gnome.desktop.interface icon-theme Papirus-Dark
+cp -r configs/.config/gtk-3.0 ~/.config/
+cp -r configs/.config/gtk-4.0 ~/.config/
 ```
 
-If GTK settings files already exist, keep them consistent:
-```bash
-for version in 3.0 4.0; do
-  settings="$HOME/.config/gtk-$version/settings.ini"
-  [ -f "$settings" ] || continue
-  sed -i 's/^gtk-icon-theme-name=.*/gtk-icon-theme-name=Papirus-Dark/' "$settings"
-done
-```
+The tracked `settings.ini` files set `gtk-icon-theme-name=Papirus-Dark` for GTK 3 and GTK 4. Restart affected applications after applying them.
 
 ---
 
