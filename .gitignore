@@ -2,15 +2,6 @@
 .opencode/
 .feynman/
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.egg-info/
-.venv/
-venv/
-.ruff_cache/
-
 # Logs
 gaia.log
 limine_output.txt

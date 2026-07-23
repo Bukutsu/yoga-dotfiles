@@ -85,18 +85,7 @@ sudo systemctl enable --now scx_loader
 ---
 
 ## Phase 6: Configure Scheduler (scx-manager)
-1. Launch **`scx-manager`** from your application menu.
-2. Select **`scx_lavd`** as the scheduler.
-3. Configure modes with your verified flags:
-
-| Mode | Flags |
-| :--- | :--- |
-| **Auto** | `--autopower --cpu-pref-order 4,12,6,14,0,8,2,10,1,3,5,7,9,11,13,15 --lb-low-util-pct 10` |
-| **Performance** | `--performance --cpu-pref-order 4,12,6,14,0,8,2,10,1,3,5,7,9,11,13,15 --lb-low-util-pct 0` |
-| **Balanced** | `--balanced --cpu-pref-order 4,12,6,14,0,8,2,10,1,3,5,7,9,11,13,15 --lb-low-util-pct 25` |
-| **Power-Saver** | `--powersave --cpu-pref-order 4,12,6,14,0,8,2,10,1,3,5,7,9,11,13,15 --lb-low-util-pct 70` |
-
-4. Set default to **`Auto`** (syncs with power-profiles-daemon).
+Select **`scx_lavd`** in `scx-manager` and use the canonical [`scx_loader.toml`](../configs/system/etc/scx_loader.toml) configuration for its modes and defaults.
 
 ---
 

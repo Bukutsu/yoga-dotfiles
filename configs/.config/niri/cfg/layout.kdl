@@ -4,8 +4,4 @@ layout {
     background-color "transparent"
 
     default-column-width { proportion 0.66667; }
-
-
-
-    struts {}
 }

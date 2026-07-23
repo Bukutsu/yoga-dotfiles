@@ -30,7 +30,6 @@ switch-events {
 binds {
     // Core shell controls. These avoid existing Niri bindings from the docs.
     Mod+A repeat=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Mod+Slash repeat=false { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Mod+I repeat=false { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
     Mod+Shift+I repeat=false { spawn "noctalia" "msg" "settings-toggle"; }
     Mod+C repeat=false { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }

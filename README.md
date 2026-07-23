@@ -51,6 +51,8 @@ cp -r configs/.config/easyeffects ~/.config/
 
 Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `wluma` and `iio-niri` from `config.kdl`. `wluma` learns your preferred brightness after several manual adjustments in different lighting conditions.
 
+Icon theme setup is covered in [INSTALL_GUIDE.md](docs/INSTALL_GUIDE.md#phase-8-set-papirus-dark-icons-niri).
+
 ### System configs
 
 Apply these individually rather than copying all of `configs/system`:
@@ -142,7 +144,7 @@ Ensure these are installed for all keybinds and hardware configs to work:
 
 ### Utilities & Media
 - **Screenshot:** `noctalia` (wlr-screencopy) + `tensaku` (annotation)
-- **Media/Brightness:** `wireplumber` (`wpctl`), `playerctl`, `brightnessctl`
+- **Media/Brightness:** `wireplumber` (`wpctl`)
 - **Config scripting:** `jq`
 
 ## License
