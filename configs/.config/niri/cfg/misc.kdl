@@ -5,13 +5,14 @@
         // Default Applications
         TERMINAL "kitty"
         BROWSER "zen-browser"
-        FILE_MANAGER "thunar"
+        FILE_MANAGER "dolphin"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
         QT_QPA_PLATFORM "wayland"
         QT_QPA_PLATFORMTHEME "gtk3"
         QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
         XDG_CURRENT_DESKTOP "niri"
+        XDG_MENU_PREFIX "arch-"
         XDG_SESSION_TYPE "wayland"
     }
 

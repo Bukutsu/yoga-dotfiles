@@ -3,5 +3,5 @@ layout {
     center-focused-column "never"
     background-color "transparent"
 
-    default-column-width { proportion 0.66667; }
+    default-column-width { proportion 0.5; }
 }
