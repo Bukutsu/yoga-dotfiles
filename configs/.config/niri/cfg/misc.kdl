@@ -8,6 +8,8 @@
         FILE_MANAGER "dolphin"
 
         ELECTRON_OZONE_PLATFORM_HINT "auto"
+        LIBVA_DRIVER_NAME "radeonsi"
+        MOZ_ENABLE_WAYLAND "1"
         QT_QPA_PLATFORM "wayland"
         QT_QPA_PLATFORMTHEME "gtk3"
         QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
