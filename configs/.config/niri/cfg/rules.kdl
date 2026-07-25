@@ -3,6 +3,12 @@ window-rule {
     clip-to-geometry true
 }
 
+// Keep password managers out of screenshots and screencasts.
+window-rule {
+    match app-id=r#"^(org\.keepassxc\.KeePassXC|com\.bitwarden\.desktop|com\.1password\.1password)$"#
+    block-out-from "screen-capture"
+}
+
 // Keep Dolphin and Thunar dialogs in floating layout.
 window-rule {
     match app-id=r#"^(Thunar|thunar|org\.kde\.dolphin|dolphin)$"#
