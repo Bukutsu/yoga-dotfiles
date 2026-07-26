@@ -1,3 +1,6 @@
+font-family = GeistMono Nerd Font
+font-size = 12
+
 theme = TokyoNight
 window-theme = ghostty
 background-opacity = 0.92
