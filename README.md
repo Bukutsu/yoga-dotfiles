@@ -51,6 +51,9 @@ cp configs/.config/mimeapps.list ~/.config/mimeapps.list
 
 # EasyEffects audio presets
 cp -r configs/.config/easyeffects ~/.config/
+
+# GNOME COSMIC-style keybindings (backs up current bindings first)
+./configs/gnome/cosmic-keybindings.sh
 ```
 
 Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `wluma` and `iio-niri` from `config.kdl`. `wluma` learns your preferred brightness after several manual adjustments in different lighting conditions.
