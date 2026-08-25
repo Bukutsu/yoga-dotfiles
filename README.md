@@ -1,124 +1,81 @@
-# Yoga 7 14AKP10 System Configuration
+# Yoga 7 14AKP10 dotfiles
 
-Personal documentation and configuration files for Lenovo Yoga 7 2-in-1 (14AKP10) running Arch Linux.
+Configs for my Lenovo Yoga 7 2-in-1 (14AKP10) running Arch Linux.
 
-## Apply the configs
-
-Clone the repository, enter it, then apply only the sections you use:
+## Apply
 
 ```bash
 git clone https://github.com/Bukutsu/yoga-dotfiles.git
 cd yoga-dotfiles
 ```
 
-Existing files at the destinations are overwritten, so back them up first.
+Copies overwrite whatever is already at the destination, so back things up first.
 
 ### User configs
 
-Copy all configuration directories to your system:
+All at once:
 
 ```bash
 cp -r configs/.config/. ~/.config/
 ```
 
-Alternatively, copy individual configurations:
+Or pick what you need:
 
 ```bash
-# Niri
 cp -r configs/.config/niri ~/.config/
-
-# Niri ambient-light auto-brightness (wluma)
 cp -r configs/.config/wluma ~/.config/
-
-# Noctalia
 cp -r configs/.config/noctalia ~/.config/
-
-# Hyprland
 cp -r configs/.config/hypr ~/.config/
-
-# Alacritty
 cp -r configs/.config/alacritty ~/.config/
-
-# Kitty
 cp -r configs/.config/kitty ~/.config/
-
-# GTK appearance and Papirus icons
 cp -r configs/.config/gtk-3.0 ~/.config/
 cp -r configs/.config/gtk-4.0 ~/.config/
-
-# MIME default applications
 cp configs/.config/mimeapps.list ~/.config/mimeapps.list
+cp -r configs/.config/easyeffects ~/.config/
 ```
 
-Restart the relevant application. Log out and back in after applying a compositor config. Niri starts `wluma` and `iio-niri` from `config.kdl`. `wluma` learns your preferred brightness after several manual adjustments in different lighting conditions.
-
-GTK icon themes are tracked in `configs/.config/gtk-3.0/settings.ini` and `configs/.config/gtk-4.0/settings.ini`. Copy both directories to apply Papirus-Dark; restart affected applications afterward.
+Restart whichever app you copied config for, and log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. The GTK directories set Papirus-Dark icons. EasyEffects finds its presets after a restart; load one from its UI.
 
 ### System configs
 
-Apply these individually rather than copying all of `configs/system`:
+Install these one at a time:
 
 ```bash
-# Copilot key remap
+# Copilot key remap, needs keyd
 sudo install -Dm644 configs/system/etc/keyd/default.conf /etc/keyd/default.conf
 sudo systemctl enable --now keyd
 
-# Disable NetworkManager Wi-Fi power saving
+# Wi-Fi power saving off
 sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powersave.conf \
   /etc/NetworkManager/conf.d/disable-wifi-powersave.conf
 sudo systemctl restart NetworkManager
 ```
 
-The key remap requires `keyd`; see [COPILOT_KEY.md](docs/COPILOT_KEY.md).
-
-Fontconfig fixes and Flatpak font access now live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
-
-## Docs
-
-- [COPILOT_KEY.md](docs/COPILOT_KEY.md) — Copilot key remap via keyd for KDE
-
-## Device
-
-- CPU: AMD Ryzen AI 7 350
-- RAM: 32GB LPDDR5X
-- Audio: Realtek ALC3306 (4-speaker)
-- WiFi: Realtek RTL8922AE
-- Display: 14" 2.8K OLED 120Hz (with X-Rite factory color profile)
+`docs/COPILOT_KEY.md` has more on the remap. Fontconfig fixes live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
 ## Niri shortcuts
 
-- `Mod+A` / `Mod+/` — Noctalia launcher
-- `Mod+I` — Noctalia control center
-- `Mod+Shift+I` — Noctalia settings
-- `Mod+C` — Noctalia clipboard
-- `Mod+Escape` — Noctalia session panel
-- `Mod+P` — cycle power profile
-- `Mod+Shift+Escape` — log out
-- `Print` — fullscreen screenshot
-- `Mod+Shift+S` — region screenshot
-- `Mod+Alt+I` — toggle the built-in `eDP-1` display (requires `jq`)
+- `Mod+A`, `Mod+/`: Noctalia launcher
+- `Mod+I`: Noctalia control center
+- `Mod+Shift+I`: Noctalia settings
+- `Mod+C`: Noctalia clipboard
+- `Mod+Escape`: Noctalia session panel
+- `Mod+P`: cycle power profile
+- `Mod+Shift+Escape`: log out
+- `Print`: fullscreen screenshot
+- `Mod+Shift+S`: region screenshot
+- `Mod+Alt+I`: toggle the built-in display (needs `jq`)
 
-Noctalia-specific bindings live in `configs/.config/niri/cfg/noctalia-integration.kdl`.
+Noctalia-specific bindings sit in `configs/.config/niri/cfg/noctalia-integration.kdl`.
 
-## Dependencies
+## Packages these configs expect
 
-Ensure these are installed for all keybinds and hardware configs to work:
+`niri` `hyprland` `plasma-desktop` `noctalia` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
 
-### Core & Shell
-- **Compositors:** `niri`, `hyprland`, `plasma-desktop`
-- **Shell/UI:** `noctalia`
-- **Terminal/Files:** `alacritty`, `kitty`, `dolphin`
+## Hardware
 
-### Hardware & System
-- **Auto-rotate:** `iio-sensor-proxy`, `iio-niri`
-- **Auto-brightness:** `wluma`, `iio-sensor-proxy`
-- **Key Remapping (Copilot Key):** `keyd`
-
-### Utilities & Media
-- **Screenshot:** `noctalia` (wlr-screencopy) + `tensaku` (annotation)
-- **Media/Brightness:** `wireplumber` (`wpctl`)
-- **Config scripting:** `jq`
+Ryzen AI 7 350, 32GB LPDDR5X, Realtek ALC3306 with four speakers, Realtek RTL8922AE WiFi, 14" 2.8K OLED at 120Hz.
 
 ## License
 
-MIT — See [LICENSE](LICENSE)
+MIT, see [LICENSE](LICENSE).
