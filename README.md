@@ -49,9 +49,6 @@ cp -r configs/.config/gtk-4.0 ~/.config/
 # MIME default applications
 cp configs/.config/mimeapps.list ~/.config/mimeapps.list
 
-# EasyEffects audio presets
-cp -r configs/.config/easyeffects ~/.config/
-
 # GNOME COSMIC-style keybindings (backs up current bindings first)
 ./configs/gnome/cosmic-keybindings.sh
 ```
@@ -73,32 +70,15 @@ sudo systemctl enable --now keyd
 sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powersave.conf \
   /etc/NetworkManager/conf.d/disable-wifi-powersave.conf
 sudo systemctl restart NetworkManager
-
-# scx_loader scheduler configuration
-sudo install -Dm644 configs/system/etc/scx_loader.toml /etc/scx_loader.toml
-sudo systemctl enable --now scx_loader
-
-# Factory display color profile
-sudo install -Dm644 configs/system/usr/share/color/icc/colord/Yoga14AKp10.icm \
-  /usr/share/color/icc/colord/Yoga14AKp10.icm
 ```
 
-Select the installed ICC profile in your desktop's color settings; see [COLOR_MANAGEMENT.md](docs/COLOR_MANAGEMENT.md). The key remap also requires `keyd`; see [COPILOT_KEY.md](docs/COPILOT_KEY.md).
-
-### EasyEffects audio presets
-
-Open EasyEffects and load one preset. See [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) for the differences.
+The key remap requires `keyd`; see [COPILOT_KEY.md](docs/COPILOT_KEY.md).
 
 Fontconfig fixes and Flatpak font access now live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
 ## Docs
 
-- [INSTALL_GUIDE.md](docs/INSTALL_GUIDE.md) — Fresh installation
-- [AUDIO_TUNING.md](docs/AUDIO_TUNING.md) — Speaker and EasyEffects setup
-- [COLOR_MANAGEMENT.md](docs/COLOR_MANAGEMENT.md) — Display color profile configuration
 - [COPILOT_KEY.md](docs/COPILOT_KEY.md) — Copilot key remap via keyd for KDE
-- [TRANSFORM_TO_ARCH.md](docs/TRANSFORM_TO_ARCH.md) — CachyOS to Arch migration
-- [DDC_CI_MONITOR_CONTROL.md](docs/DDC_CI_MONITOR_CONTROL.md) — External monitor input switching via DDC/CI
 
 ## Device
 
@@ -136,8 +116,6 @@ Ensure these are installed for all keybinds and hardware configs to work:
 - **Auto-rotate:** `iio-sensor-proxy`, `iio-niri`
 - **Auto-brightness:** `wluma`, `iio-sensor-proxy`
 - **Key Remapping (Copilot Key):** `keyd`
-- **Scheduling:** `scx-scheds` (for `scx_loader`)
-- **Audio Tuning:** `easyeffects`
 
 ### Utilities & Media
 - **Screenshot:** `noctalia` (wlr-screencopy) + `tensaku` (annotation)
