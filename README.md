@@ -31,10 +31,15 @@ cp -r configs/.config/kitty ~/.config/
 cp -r configs/.config/gtk-3.0 ~/.config/
 cp -r configs/.config/gtk-4.0 ~/.config/
 cp configs/.config/mimeapps.list ~/.config/mimeapps.list
-cp -r configs/.config/easyeffects ~/.config/
 ```
 
-Restart whichever app you copied config for, and log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. The GTK directories set Papirus-Dark icons. EasyEffects finds its presets after a restart; load one from its UI.
+EasyEffects 8 keeps its presets outside `~/.config`:
+
+```bash
+cp -r configs/.local/share/easyeffects ~/.local/share/
+```
+
+Restart whichever app you copied config for, and log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. The GTK directories set Papirus-Dark icons. EasyEffects finds its presets after a restart; load one from its UI. Autoload binds the Yoga speaker route to Yoga_7_Harman_Target and falls back to Default everywhere else.
 
 ### System configs
 
