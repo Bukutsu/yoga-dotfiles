@@ -30,6 +30,7 @@ cp -r configs/.config/alacritty ~/.config/
 cp -r configs/.config/kitty ~/.config/
 cp -r configs/.config/gtk-3.0 ~/.config/
 cp -r configs/.config/gtk-4.0 ~/.config/
+cp -r configs/.config/fontconfig ~/.config/
 cp configs/.config/mimeapps.list ~/.config/mimeapps.list
 ```
 
@@ -56,7 +57,7 @@ sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powers
 sudo systemctl restart NetworkManager
 ```
 
-`docs/COPILOT_KEY.md` has more on the remap. Fontconfig fixes live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
+`docs/COPILOT_KEY.md` has more on the remap. Thai UI fallback is documented in `docs/THAI_FONT_FALLBACK.md`. Fontconfig fixes for Flatpaks live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
 ## Niri shortcuts
 
