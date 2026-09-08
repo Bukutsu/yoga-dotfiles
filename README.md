@@ -59,21 +59,6 @@ sudo systemctl restart NetworkManager
 
 `docs/COPILOT_KEY.md` has more on the remap. Thai UI fallback is documented in `docs/THAI_FONT_FALLBACK.md`. Fontconfig fixes for Flatpaks live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
-## Niri shortcuts
-
-- `Mod+A`, `Mod+/`: Noctalia launcher
-- `Mod+I`: Noctalia control center
-- `Mod+Shift+I`: Noctalia settings
-- `Mod+C`: Noctalia clipboard
-- `Mod+Escape`: Noctalia session panel
-- `Mod+P`: cycle power profile
-- `Mod+Shift+Escape`: log out
-- `Print`: fullscreen screenshot
-- `Mod+Shift+S`: region screenshot
-- `Mod+Alt+I`: toggle the built-in display (needs `jq`)
-
-Noctalia-specific bindings sit in `configs/.config/niri/cfg/noctalia-integration.kdl`.
-
 ## Packages these configs expect
 
 `niri` `hyprland` `plasma-desktop` `noctalia` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
