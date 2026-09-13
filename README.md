@@ -1,6 +1,6 @@
 # Yoga 7 14AKP10 dotfiles
 
-Configs for my Lenovo Yoga 7 2-in-1 (14AKP10) running Arch Linux.
+Configs for my Lenovo Yoga 7 2-in-1 (14AKP10) running Linux.
 
 ## Apply
 
@@ -24,14 +24,9 @@ Or pick what you need:
 ```bash
 cp -r configs/.config/niri ~/.config/
 cp -r configs/.config/wluma ~/.config/
-cp -r configs/.config/noctalia ~/.config/
-cp -r configs/.config/hypr ~/.config/
 cp -r configs/.config/alacritty ~/.config/
 cp -r configs/.config/kitty ~/.config/
-cp -r configs/.config/gtk-3.0 ~/.config/
-cp -r configs/.config/gtk-4.0 ~/.config/
 cp -r configs/.config/fontconfig ~/.config/
-cp configs/.config/mimeapps.list ~/.config/mimeapps.list
 ```
 
 EasyEffects 8 keeps its presets outside `~/.config`:
@@ -40,7 +35,7 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. The GTK directories set Papirus-Dark icons. EasyEffects finds its presets after a restart. Load one from its UI. Autoload binds the Yoga speaker route to `Z16-Dynamic-Balanced` and falls back to `Default` everywhere else.
+Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload binds the Yoga speaker route to `Z16-Dynamic-Balanced` and falls back to `Default` everywhere else.
 
 ### System configs
 
@@ -61,7 +56,7 @@ sudo systemctl restart NetworkManager
 
 ## Required packages
 
-`niri` `hyprland` `plasma-desktop` `noctalia` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
+`niri` `plasma-desktop` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
 
 ## Hardware
 
