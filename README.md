@@ -40,7 +40,7 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart whichever app you copied config for, and log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. The GTK directories set Papirus-Dark icons. EasyEffects finds its presets after a restart; load one from its UI. Autoload binds the Yoga speaker route to Z16-Dynamic-Balanced and falls back to Default everywhere else.
+Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. The GTK directories set Papirus-Dark icons. EasyEffects finds its presets after a restart. Load one from its UI. Autoload binds the Yoga speaker route to `Z16-Dynamic-Balanced` and falls back to `Default` everywhere else.
 
 ### System configs
 
@@ -57,16 +57,16 @@ sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powers
 sudo systemctl restart NetworkManager
 ```
 
-`docs/COPILOT_KEY.md` has more on the remap. Thai UI fallback is documented in `docs/THAI_FONT_FALLBACK.md`. Fontconfig fixes for Flatpaks live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
+`docs/COPILOT_KEY.md` has more on the remap. `docs/THAI_FONT_FALLBACK.md` covers Thai UI fallback. Fontconfig fixes for Flatpaks live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
-## Packages these configs expect
+## Required packages
 
 `niri` `hyprland` `plasma-desktop` `noctalia` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
 
 ## Hardware
 
-Ryzen AI 7 350, 32GB LPDDR5X, Realtek ALC3306 with four speakers, Realtek RTL8922AE WiFi, 14" 2.8K OLED at 120Hz.
+Hardware is Ryzen AI 7 350, 32GB LPDDR5X, Realtek ALC3306 with four speakers, Realtek RTL8922AE WiFi, and 14" 2.8K OLED at 120Hz.
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+License is MIT, see [LICENSE](LICENSE).
