@@ -8,7 +8,7 @@
             "output-gain": 0.0,
             "kernel-name": "Dolby-Laptop-Balanced-064da8a3",
             "ir-width": 100,
-            "autogain": false
+            "autogain": true
         },
         "plugins_order": [
             "convolver#0",

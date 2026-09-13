@@ -30,6 +30,8 @@ The presets come from Lenovo's own Windows tuning, not from hand EQ. The Dolby D
 - `Yoga_7_KH120_Neutral` — Balanced with the 2.5 kHz presence bell flattened.
 - `Default` — empty, on autoload for the TP35 Pro DAC and as fallback.
 
+Convolver autogain is on in all correction presets. It restores the level the correction itself removes and does not change the curve. The limiter chain after it catches peaks.
+
 Autoload maps the Yoga speaker to `Dolby-Laptop-Balanced` and the TP35 Pro to `Default`. In EasyEffects set the output fallback preset to `Default` so new devices land there. That setting lives in `~/.config/easyeffects/db/easyeffectsrc`, so copying presets alone does not set it.
 
 ## Gotchas
