@@ -1,6 +1,6 @@
 # Speaker audio
 
-Yoga 7 2-in-1 14AKP10 (83JR). Realtek ALC287, four speakers: two tweeters plus two woofers.
+Yoga 7 2-in-1 14AKP10 (83JR). Realtek ALC287 (the ALC3306 identifies as ALC287), four speakers: two tweeters plus two woofers.
 
 ## Four speakers
 
@@ -24,9 +24,9 @@ Reboot after. Card positions can vary, so confirm with `aplay -l` that the quirk
 The presets come from Lenovo's own Windows tuning, not from hand EQ. The Dolby DAX3 XML for subsystem `17AA:391C` (in the [Realtek/Dolby driver](https://support.lenovo.com/us/en/downloads/ds573482-audio-driver-realtek-dolby-yoga-7-2-in-1-14akp10-yoga-7-2-in-1-16akp10)) was converted with [speaker-tuning-to-easyeffects](https://github.com/antoinecellerier/speaker-tuning-to-easyeffects). The old `Z16` impulse was a ThinkPad Z16 Gen 1 tuning and is gone.
 
 - `Dolby-Laptop-Balanced` — the stock tuning, on autoload for the speakers.
-- `Dolby-Laptop-Detailed`, `Dolby-Laptop-Warm` — same correction, voicing differs at 10% strength. Near-identical to Balanced.
+- `Dolby-Laptop-Detailed`, `Dolby-Laptop-Warm` — same correction, voicing differs at 10% strength. They sound near-identical to Balanced.
 - `Yoga_7_Daily` — Balanced plus gentle air and autogain on, target −14. Levels volume across tracks.
-- `Yoga_7_Diamond_Beta` — Balanced plus +5 dB air shelf at 8 kHz. Bright.
+- `Yoga_7_Diamond_Beta` — Balanced plus +5 dB air shelf at 8 kHz. It sounds bright.
 - `Yoga_7_KH120_Neutral` — Balanced with the 2.5 kHz presence bell flattened.
 - `Default` — empty, on autoload for the TP35 Pro DAC and as fallback.
 
@@ -37,5 +37,5 @@ Autoload maps the Yoga speaker to `Dolby-Laptop-Balanced` and the TP35 Pro to `D
 ## Gotchas
 
 - Switching outputs with the EasyEffects window open can segfault it. Close the window first; headless switching is fine.
-- The XML also holds tablet, tent, and stand tunings. Only laptop pose is converted. Ask for the rest if you use those poses.
-- These are 2 W drivers behind limiters. `Daily` plus the desktop slider past 100% is the loudest sane setup. Louder than that is distortion, not sound.
+- The XML also holds tablet, tent, and stand tunings. Only laptop pose is converted. The conversion script can generate the rest with `--mode tablet`, `tent`, or `stand`.
+- These are small laptop drivers behind limiters. `Daily` plus the desktop slider past 100% is the loudest sane setup. Beyond that point the limiters only add distortion.
