@@ -17,7 +17,7 @@ echo 'options snd-hda-intel model=(null),alc287-yoga9-bass-spk-pin' | sudo tee /
 sudo dracut -f # Fedora; on Arch run: sudo mkinitcpio -P
 ```
 
-Reboot after. Card positions can vary, so confirm with `aplay -l` that the quirk lands on the ALC287 card.
+Reboot after applying it. Card positions can vary, so confirm with `aplay -l` that the quirk lands on the ALC287 card.
 
 ## Presets
 
@@ -25,14 +25,14 @@ The presets come from Lenovo's own Windows tuning, not from hand EQ. The Dolby D
 
 - `Dolby-Laptop-Balanced` — the stock tuning, on autoload for the speakers.
 - `Dolby-Laptop-Detailed`, `Dolby-Laptop-Warm` — same correction, voicing differs at 10% strength. They sound near-identical to Balanced.
-- `Yoga_7_Daily` — Balanced plus gentle air and autogain on, target −14. Levels volume across tracks.
+- `Yoga_7_Daily` — Balanced plus gentle air and autogain on, target −14 dB. Levels volume across tracks.
 - `Yoga_7_Diamond_Beta` — Balanced plus +5 dB air shelf at 8 kHz. It sounds bright.
 - `Yoga_7_KH120_Neutral` — Balanced with the 2.5 kHz presence bell flattened.
-- `Default` — empty, on autoload for the TP35 Pro DAC and as fallback.
+- `Default` — empty, on autoload for the USB DAC and as fallback.
 
 Convolver autogain is on in all correction presets. It restores the level the correction itself removes and does not change the curve. The limiter chain after it catches peaks.
 
-Autoload maps the Yoga speaker to `Dolby-Laptop-Balanced` and the TP35 Pro to `Default`. In EasyEffects set the output fallback preset to `Default` so new devices land there. That setting lives in `~/.config/easyeffects/db/easyeffectsrc`, so copying presets alone does not set it.
+Autoload maps the internal speaker to `Dolby-Laptop-Balanced` and the USB DAC to `Default`. In EasyEffects set the output fallback preset to `Default` so new devices land there. That setting lives in `~/.config/easyeffects/db/easyeffectsrc`, so copying presets alone does not set it.
 
 ## Gotchas
 
