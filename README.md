@@ -35,7 +35,7 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload binds the Yoga speaker route to `Z16-Dynamic-Balanced` and falls back to `Default` everywhere else.
+Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload maps the Yoga speaker to `Dolby-Laptop-Balanced` and the TP35 Pro to `Default`. Speaker details live in `docs/AUDIO.md`.
 
 ### System configs
 
