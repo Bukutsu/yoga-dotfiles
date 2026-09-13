@@ -35,7 +35,7 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload maps the Yoga speaker to `Dolby-Laptop-Balanced` and the TP35 Pro to `Default`. Speaker details live in `docs/AUDIO.md`.
+Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload maps the internal speaker to `Dolby-Laptop-Balanced` and the USB DAC to `Default`. Speaker details live in `docs/AUDIO.md`.
 
 ### System configs
 
@@ -57,10 +57,6 @@ sudo systemctl restart NetworkManager
 ## Required packages
 
 `niri` `plasma-desktop` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
-
-## Hardware
-
-Hardware is Ryzen AI 7 350, 32GB LPDDR5X, Realtek ALC3306 with four speakers, Realtek RTL8922AE WiFi, and 14" 2.8K OLED at 120Hz.
 
 ## License
 
