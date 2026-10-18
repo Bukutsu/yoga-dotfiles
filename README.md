@@ -35,7 +35,7 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload maps the internal speaker to `Dolby-Laptop-Balanced` and the USB DAC to `Default`. Speaker details live in `docs/AUDIO.md`.
+Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload applies `Dolby-Laptop-Balanced` only on the internal speaker. Every other output gets `Default` once you set it as the output fallback preset (see `docs/AUDIO.md`). Speaker details live in `docs/AUDIO.md`.
 
 ### System configs
 

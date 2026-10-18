@@ -28,11 +28,15 @@ The presets come from Lenovo's own Windows tuning, not from hand EQ. The Dolby D
 - `Yoga_7_Daily`: Balanced plus gentle air and autogain on, target −14 dB. Levels volume across tracks.
 - `Yoga_7_Diamond_Beta`: Balanced plus +5 dB air shelf at 8 kHz. It sounds bright.
 - `Yoga_7_KH120_Neutral`: Balanced with the 2.5 kHz presence bell flattened.
-- `Default`: empty, on autoload for the USB DAC and as fallback.
+- `Default`: empty, the fallback for every output except the speaker.
 
 Convolver autogain is on in all correction presets. It restores the level the correction itself removes and does not change the curve. The limiter chain after it catches peaks.
 
-Autoload maps the internal speaker to `Dolby-Laptop-Balanced` and the USB DAC to `Default`. In EasyEffects set the output fallback preset to `Default` so new devices land there. That setting lives in `~/.config/easyeffects/db/easyeffectsrc`, so copying presets alone does not set it.
+Autoload applies `Dolby-Laptop-Balanced` only to the internal speaker. In EasyEffects enable the output fallback and set its preset to `Default` so every other output lands there. Those settings live in `~/.config/easyeffects/db/easyeffectsrc`, so copying presets alone does not set it.
+
+Autoload files are named `<device>:<route>.json`, and `device-profile` is the PipeWire route *description* (`Speaker`), not its name (`[Out] Speaker`). Headphones on the jack are a separate route (`Headphones`), so they get `Default`.
+
+The fallback only works when `outputAutoloadingUsesFallback=true` is also set under `[Window]` in the same file. It is off by default. In the UI it is the fallback toggle on the autoloading page.
 
 ## Gotchas
 
