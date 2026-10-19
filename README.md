@@ -1,6 +1,6 @@
 # Yoga 7 14AKP10 dotfiles
 
-Configs for my Lenovo Yoga 7 2-in-1 (14AKP10) running Linux.
+Configs for my Lenovo Yoga 7 2-in-1 (14AKP10) running Linux: niri, wluma, EasyEffects speaker presets, and a Copilot key remap.
 
 ## Apply
 
@@ -13,7 +13,7 @@ Copies overwrite whatever is already at the destination, so back things up first
 
 ### User configs
 
-All at once:
+Everything at once:
 
 ```bash
 cp -r configs/.config/. ~/.config/
@@ -26,6 +26,7 @@ cp -r configs/.config/niri ~/.config/
 cp -r configs/.config/wluma ~/.config/
 cp -r configs/.config/alacritty ~/.config/
 cp -r configs/.config/kitty ~/.config/
+cp -r configs/.config/ghostty ~/.config/
 cp -r configs/.config/fontconfig ~/.config/
 ```
 
@@ -35,7 +36,11 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart the app you copied config for. Log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own. `wluma` learns your preferred brightness after you adjust it manually a few times in different lighting. EasyEffects finds its presets after a restart. Load one from its UI. Autoload applies `Dolby-Laptop-Balanced` only on the internal speaker. Every other output gets `Default` once you set it as the output fallback preset (see `docs/AUDIO.md`). Speaker details live in `docs/AUDIO.md`.
+Restart the app you copied config for, and log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own.
+
+`wluma` learns your preferred brightness after you adjust it manually a few times in different lighting.
+
+EasyEffects finds its presets after a restart. Load one from its UI. Autoload applies `Dolby-Laptop-Balanced` only on the internal speaker; every other output gets `Default` once you set it as the output fallback preset. `docs/AUDIO.md` covers the presets and the speaker setup.
 
 ### System configs
 
@@ -56,8 +61,16 @@ sudo systemctl restart NetworkManager
 
 ## Required packages
 
-`niri` `plasma-desktop` `alacritty` `kitty` `dolphin` `iio-sensor-proxy` `iio-niri` `wluma` `keyd` `wireplumber` `jq` `tensaku` `easyeffects`
+Compositor and desktop: `niri` `plasma-desktop`
+
+Terminals and files: `alacritty` `kitty` `dolphin`
+
+Rotation and brightness: `iio-sensor-proxy` `iio-niri` `wluma`
+
+Input and audio: `keyd` `wireplumber` `easyeffects`
+
+Utilities: `jq` `tensaku`
 
 ## License
 
-License is MIT, see [LICENSE](LICENSE).
+MIT, see [LICENSE](LICENSE).
