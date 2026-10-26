@@ -1,18 +1,18 @@
 # Thai font fallback
 
-This fixes websites and Chromium-based browsers falling back to `TH Sarabun` (or other document fonts) instead of modern sans-serif UI fonts when rendering Thai text in an English-locale context.
+This config makes websites and Chromium-based browsers use modern sans-serif UI fonts for Thai text in an English-locale context, rather than falling back to `TH Sarabun` or other document fonts.
 
 ## Problem
 
-`TH Sarabun` packages Latin characters and declares support for English (`lang: en`). Dedicated Thai UI fonts like `Noto Sans Thai` only declare support for Thai (`lang: th`).
+`TH Sarabun` includes Latin characters and declares English support (`lang: en`). Dedicated Thai UI fonts such as `Noto Sans Thai` only declare Thai support (`lang: th`).
 
-When a page (such as Facebook) sets `<html lang="en">`, Fontconfig penalizes `Noto Sans Thai` for not supporting English. Fallback characters then go to `TH Sarabun`. Because `TH Sarabun` has a ~50% em consonant body designed for MS Word printing, Thai text renders noticeably smaller and thinner than surrounding UI text.
+When a page such as Facebook sets `<html lang="en">`, Fontconfig penalizes `Noto Sans Thai` because it does not support English. Thai characters then fall back to `TH Sarabun`. Designed for MS Word printing, `TH Sarabun` has a consonant body of about 50% em, so the Thai text looks smaller and thinner than the surrounding UI text.
 
 ## Solution
 
-The tracked [`99-thai-fallback.conf`](../configs/.config/fontconfig/conf.d/99-thai-fallback.conf) explicitly binds `Noto Sans Thai` as the strong fallback for generic `sans-serif`, `serif`, and `monospace` families.
+The tracked [`99-thai-fallback.conf`](../configs/.config/fontconfig/conf.d/99-thai-fallback.conf) sets `Noto Sans Thai` as the strong fallback for the generic `sans-serif`, `serif`, and `monospace` families.
 
-Explicit requests for `TH SarabunPSK` or `TH Sarabun New` in documents or government websites remain unaffected.
+Documents and government websites that explicitly request `TH SarabunPSK` or `TH Sarabun New` still use those fonts.
 
 ## Install
 
@@ -22,4 +22,4 @@ cp configs/.config/fontconfig/conf.d/99-thai-fallback.conf ~/.config/fontconfig/
 fc-cache -fv ~/.config/fontconfig/conf.d
 ```
 
-Restart running browsers to load the updated cache.
+Restart your browsers to load the updated cache.

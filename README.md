@@ -1,25 +1,25 @@
 # Yoga 7 14AKP10 dotfiles
 
-Configs for my Lenovo Yoga 7 2-in-1 (14AKP10) running Linux: niri, wluma, EasyEffects speaker presets, and a Copilot key remap.
+My Linux configs for the Lenovo Yoga 7 2-in-1 (14AKP10), including niri, wluma, EasyEffects speaker presets, and a Copilot key remap.
 
-## Apply
+## Install
 
 ```bash
 git clone https://github.com/Bukutsu/yoga-dotfiles.git
 cd yoga-dotfiles
 ```
 
-Copies overwrite whatever is already at the destination, so back things up first.
+Back up your existing configs first. These copy commands overwrite files at the destination.
 
 ### User configs
 
-Everything at once:
+Copy all user configs:
 
 ```bash
 cp -r configs/.config/. ~/.config/
 ```
 
-Or pick what you need:
+Or copy only what you need:
 
 ```bash
 cp -r configs/.config/niri ~/.config/
@@ -36,15 +36,15 @@ EasyEffects 8 keeps its presets outside `~/.config`:
 cp -r configs/.local/share/easyeffects ~/.local/share/
 ```
 
-Restart the app you copied config for, and log out and back in for compositor changes. Niri starts `wluma` and `iio-niri` on its own.
+Restart each app after copying its config. For compositor changes, log out and back in. Niri starts `wluma` and `iio-niri` automatically.
 
-`wluma` learns your preferred brightness after you adjust it manually a few times in different lighting.
+Adjust the brightness manually a few times in different lighting so `wluma` can learn your preferences.
 
-EasyEffects finds its presets after a restart. Load one from its UI. Autoload applies `Dolby-Laptop-Balanced` only on the internal speaker; every other output gets `Default` once you set it as the output fallback preset. `docs/AUDIO.md` covers the presets and the speaker setup.
+Restart EasyEffects to load the presets, then choose one in the UI. Autoload applies `Dolby-Laptop-Balanced` only to the internal speaker. Set `Default` as the output fallback preset for all other outputs. See `docs/AUDIO.md` for the presets and speaker setup.
 
 ### System configs
 
-Install these one at a time:
+Install the system configs you need, one at a time:
 
 ```bash
 # Copilot key remap, needs keyd
@@ -57,7 +57,7 @@ sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powers
 sudo systemctl restart NetworkManager
 ```
 
-`docs/COPILOT_KEY.md` has more on the remap. `docs/THAI_FONT_FALLBACK.md` covers Thai UI fallback. Fontconfig fixes for Flatpaks live in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
+See `docs/COPILOT_KEY.md` for remap details and `docs/THAI_FONT_FALLBACK.md` for Thai UI font fallback. Fontconfig fixes for Flatpaks are in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
 ## Required packages
 
