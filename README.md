@@ -57,7 +57,7 @@ sudo install -Dm644 configs/system/etc/NetworkManager/conf.d/disable-wifi-powers
 sudo systemctl restart NetworkManager
 ```
 
-See `docs/COPILOT_KEY.md` for remap details and `docs/THAI_FONT_FALLBACK.md` for Thai UI font fallback. Fontconfig fixes for Flatpaks are in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
+See `docs/COPILOT_KEY.md` for remap details, `docs/THAI_FONT_FALLBACK.md` for Thai UI font fallback, and `docs/FACE_UNLOCK.md` for IR face unlock and the deferred NPU setup. Fontconfig fixes for Flatpaks are in [fontconfig-flatpak-fonts](https://github.com/Bukutsu/fontconfig-flatpak-fonts).
 
 ## Required packages
 
